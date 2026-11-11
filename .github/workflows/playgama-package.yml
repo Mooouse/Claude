@@ -1,0 +1,136 @@
+name: Package Infinity Space HQ music for Playgama
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'index.html'
+      - 'cosmic-arena.html'
+      - 'cosmic-worms.html'
+      - '*.js'
+      - '*.css'
+      - '*.svg'
+      - 'assets/**'
+      - 'playgama-bridge-config.json'
+      - 'tools/build_single_html.py'
+      - 'tests/single-html-smoke.cjs'
+      - 'tests/embedded-modes-smoke.cjs'
+      - '.github/workflows/playgama-package.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: infinity-space-single-html-release
+  cancel-in-progress: true
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate the original game and the one-file builder
+        run: |
+          set -euo pipefail
+          node --check game.js
+          node --check cosmic-worms.js
+          node --check platform.js
+          node --check playgama-platform.js
+          node --check playgama-ui.js
+          python3 -m py_compile tools/build_single_html.py
+          node -e "JSON.parse(require('fs').readFileSync('playgama-bridge-config.json','utf8'))"
+          node tests/meta.cjs
+          node tests/regressions.cjs
+          node tests/music.cjs
+
+      - name: Build Playgama ZIP under 20 MB with original unmodified audio served online
+        run: |
+          set -euo pipefail
+          mkdir -p dist
+          python3 tools/build_single_html.py dist/index.html
+          python3 - <<'PY'
+          from pathlib import Path
+          import json
+          root = Path('dist')
+          standalone = root / 'index.html'
+          upload = root / 'playgama' / 'index.html'
+          cfg = root / 'playgama' / 'playgama-bridge-config.json'
+          assert standalone.is_file() and upload.is_file() and cfg.is_file()
+          assert standalone.stat().st_size < 20_000_000
+          assert upload.stat().st_size < 20_000_000
+          assert '<script>window.SpaceInlineBridgeConfig=' in standalone.read_text('utf-8')
+          assert '<script>window.SpaceInlineBridgeConfig=' not in upload.read_text('utf-8')
+          assert json.loads(cfg.read_text('utf-8')) == json.loads(Path('playgama-bridge-config.json').read_text('utf-8'))
+          for page in [standalone, upload]:
+              html = page.read_text('utf-8')
+              assert html.count('data:image/jpeg;base64,') >= 12
+              assert 'data-origin="embedded-arcade-router"' in html
+              assert 'https://bridge.playgama.com/v2/stable/playgama-bridge.js' in html
+              assert 'data:audio/mp4;base64,' not in html
+              assert 'inline-audio-' not in html
+              assert 'https://mooouse.github.io/Infinity-Space/assets/music/' in html
+          for n in range(1, 13):
+              original = Path(f'assets/music/track-{n:02d}.mp3')
+              assert original.stat().st_size > 1_000_000
+              assert f'assets/music/track-{n:02d}.mp3' in upload.read_text('utf-8')
+          print('PASS: Playgama streaming URLs point to original 12 full-quality MP3s')
+          PY
+          (cd dist/playgama && zip -q -9 ../../infinity-space-playgama.zip index.html playgama-bridge-config.json)
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          p = 'infinity-space-playgama.zip'
+          with ZipFile(p) as z:
+              actual = {x.filename for x in z.infolist() if not x.is_dir()}
+              assert actual == {'index.html', 'playgama-bridge-config.json'}, actual
+              assert z.testzip() is None
+          import os
+          assert os.path.getsize(p) < 20_000_000
+          print('PASS: standalone SDK+HTML ZIP under 20 MB, music unchanged on external host')
+          PY
+          ls -lh dist/index.html dist/playgama/index.html infinity-space-playgama.zip
+
+      - name: Browser-test high-quality music sources and Playgama root config
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm install --silent --no-audit --no-fund --prefix "$RUNNER_TEMP/infinity-single-test" playwright@1.56.1
+          export PLAYWRIGHT_BROWSERS_PATH="$RUNNER_TEMP/infinity-single-chromium"
+          "$RUNNER_TEMP/infinity-single-test/node_modules/.bin/playwright" install chromium --only-shell
+          python3 -m http.server 8766 --directory dist --bind 127.0.0.1 > "$RUNNER_TEMP/infinity-single-server.log" 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+          export NODE_PATH="$RUNNER_TEMP/infinity-single-test/node_modules"
+          timeout 120 node tests/single-html-smoke.cjs
+          timeout 150 node tests/embedded-modes-smoke.cjs
+
+      - name: Upload high-quality-music single HTML (streams original MP3s)
+        uses: actions/upload-artifact@v4
+        with:
+          name: infinity-space-single-html
+          path: dist/index.html
+          retention-days: 1
+          if-no-files-found: error
+
+      - name: Upload small Playgama ZIP (HTML and Bridge JSON, stream HQ MP3s)
+        uses: actions/upload-artifact@v4
+        with:
+          name: infinity-space-playgama
+          path: infinity-space-playgama.zip
+          retention-days: 1
+          if-no-files-found: error
+
+      - name: Publish direct HTML download URL (no artifact ZIP wrapper)
+        if: github.ref == 'refs/heads/main'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          TAG="infinity-space-single-html"
+          if ! gh release view "$TAG" >/dev/null 2>&1; then
+            gh release create "$TAG" --target "$GITHUB_SHA" \
+              --title "Infinity Space — One HTML (Playgama)" \
+              --notes "Standalone and Playgama ZIP both stream exact untouched original MP3s from the game's GitHub Pages. Playgama ZIP contains HTML and required Bridge JSON, under 20 MB. Needs internet to play music. Release files are overwritten with each new build." \
+              --latest=false
+          fi
+          gh release upload "$TAG" dist/index.html --clobber
+          gh release upload "$TAG" infinity-space-playgama.zip --clobber
+          gh release view "$TAG" --json assets --jq '.assets[] | [.name,.size,.url] | @tsv'
