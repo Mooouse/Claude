@@ -25,8 +25,8 @@ jobs:
           test -s "$source_dir/cosmic-worms.js"
           test -s "$source_dir/assets/music/track-01.mp3"
           test "$(find "$source_dir/assets/music" -type f -name '*.mp3' | wc -l)" -eq 12
-          # Preserve original files exactly, including dotfiles, workflows and binary tracks.
-          rsync -a --delete --exclude='/.git/' "$source_dir/" "$GITHUB_WORKSPACE/"
+          # Preserve original game files and binary tracks; workflow files will be synced separately with the GitHub connector.
+          rsync -a --delete --exclude='/.git/' --exclude='/.github/workflows/' "$source_dir/" "$GITHUB_WORKSPACE/"
           cd "$GITHUB_WORKSPACE"
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
