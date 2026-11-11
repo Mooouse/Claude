@@ -1,0 +1,46 @@
+name: UI responsiveness and navigation audit
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'game.js'
+      - 'cosmic-arena.html'
+      - 'cosmic-worms.html'
+      - 'cosmic-worms.js'
+      - 'cosmic-worms.css'
+      - 'ui-v15*.css'
+      - 'ui-v15*.js'
+      - 'ui-responsive-repair.css'
+      - 'mobile-ui-polish.css'
+      - 'menu-*.js'
+      - 'menu-*.css'
+      - 'player-profile.*'
+      - 'index.html'
+      - 'tests/full-ui-audit.cjs'
+      - 'tests/menu-layout-audit.cjs'
+      - 'tests/worms-browser-smoke.cjs'
+      - 'tests/arena-ui-audit.cjs'
+      - 'tests/gameplay-navigation-audit.cjs'
+      - '.github/workflows/ui-audit.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  ui-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Chromium
+        run: |
+          npm install --silent --no-audit --no-fund playwright@1.56.1
+          npx playwright install chromium --only-shell
+      - name: Audit screens, Back navigation and responsive text
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/infinity-ui-audit-http.log 2>&1 &
+          sleep 2
+          timeout 300 node tests/menu-layout-audit.cjs
+          timeout 150 node tests/worms-browser-smoke.cjs
+          timeout 500 node tests/full-ui-audit.cjs
+          timeout 400 node tests/arena-ui-audit.cjs
+          timeout 180 node tests/gameplay-navigation-audit.cjs
