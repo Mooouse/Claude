@@ -1,0 +1,72 @@
+name: Direct download — Infinity Space single HTML
+on:
+  push:
+    paths:
+      - '.github/workflows/direct-html-release.yml'
+  workflow_run:
+    workflows:
+      - 'Package Infinity Space HQ music for Playgama'
+    types: [completed]
+permissions:
+  actions: read
+  contents: write
+jobs:
+  publish:
+    if: github.event_name == 'push' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download already validated build artifacts
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          RUN_ID="42769092073"
+          if [[ "$GITHUB_EVENT_NAME" == "workflow_run" ]]; then
+            RUN_ID="${{ github.event.workflow_run.id }}"
+          fi
+          mkdir -p "$RUNNER_TEMP/single" "$RUNNER_TEMP/zip"
+          gh run download "$RUN_ID" -R "$GITHUB_REPOSITORY" \
+            --name infinity-space-single-html -D "$RUNNER_TEMP/single"
+          gh run download "$RUN_ID" -R "$GITHUB_REPOSITORY" \
+            --name infinity-space-playgama -D "$RUNNER_TEMP/zip"
+          test -s "$RUNNER_TEMP/single/index.html"
+          test -s "$RUNNER_TEMP/zip/infinity-space-playgama.zip"
+          python3 - <<'PY'
+          import os, json, zipfile
+          path = os.path.join(os.environ['RUNNER_TEMP'], 'zip', 'infinity-space-playgama.zip')
+          assert os.path.getsize(path) < 20_000_000
+          with zipfile.ZipFile(path) as z:
+              expected = {'index.html', 'playgama-bridge-config.json'}
+              present = {x.filename for x in z.infolist() if not x.is_dir()}
+              assert present == expected, present
+              assert z.testzip() is None
+              config = json.loads(z.read('playgama-bridge-config.json'))
+              assert config['advertisement']['rewarded']['preloadOnStart'] is True
+              html = z.read('index.html')
+              assert len(html) < 20_000_000
+              assert b'<script>window.SpaceInlineBridgeConfig=' not in html
+              assert b'data:audio/mp4;base64,' not in html
+              assert b'https://mooouse.github.io/Infinity-Space/assets/music/' in html
+          print('Verified: HQ music streamed, Playgama ZIP under 20 MB')
+          PY
+          python3 -c 'import pathlib,os; p=pathlib.Path(os.environ["RUNNER_TEMP"])/"single"/"index.html"; assert p.stat().st_size < 20_000_000; print("Verified HTML size",p.stat().st_size)'
+
+      - name: Maintain fixed direct download URLs
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          TAG="infinity-space-single-html"
+          if ! gh release view "$TAG" >/dev/null 2>&1; then
+            gh release create "$TAG" --target "$GITHUB_SHA" \
+              --title "Infinity Space — One HTML (Playgama)" \
+              --notes "Under 20 MB Playgama ZIP contains HTML and Bridge JSON; all 12 untouched original-quality MP3s stream from mooouse.github.io/Infinity-Space/. Standalone HTML uses the same original songs." \
+              --latest=false
+          fi
+          gh release upload "$TAG" "$RUNNER_TEMP/single/index.html" --clobber
+          gh release upload "$TAG" "$RUNNER_TEMP/zip/infinity-space-playgama.zip" --clobber
+          gh release view "$TAG" --json assets --jq '.assets[] | [.name,.size] | @tsv'
