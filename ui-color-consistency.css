@@ -1,0 +1,269 @@
+/* Infinity Space v8: semantic control colors, no cross-colored hover halos.
+   Core surfaces are graphite/navy. Strong colors are reserved for actions. */
+:root{
+ --space-red:#ff1744;--space-green:#27ff40;--space-yellow:#ffe500;
+ --space-purple:#9922ff;--space-blue:#2860ff;
+ --ui-neutral:#121a30;--ui-neutral-2:#1a2641;
+}
+body.ui-v15 #modal .screen{--interaction-accent:var(--space-blue)}
+body.ui-v15 #screen-menu[data-preview-mode="endless"]{--mode-accent:var(--space-blue)}
+body.ui-v15 #screen-menu[data-preview-mode="arena"]{--mode-accent:var(--space-red)}
+body.ui-v15 #screen-menu[data-preview-mode="royale"]{--mode-accent:var(--space-purple)}
+body.ui-v15 #screen-menu[data-preview-mode="core"]{--mode-accent:var(--space-green)}
+body.ui-v15 #screen-menu[data-preview-mode="race"]{--mode-accent:var(--space-yellow)}
+body.ui-v15 #screen-menu[data-preview-mode="worms"]{--mode-accent:var(--space-purple)}
+/* Navigation is consistently blue; primary CTAs are purple and warnings red. */
+body.ui-v15 #modal :is(.br-head-back,.br-foot-secondary,.br-small-action,
+ .br-tab,.br-filter,.page-nav .back,.map-header .back,.pill-button,
+ .game-select-trigger,.game-select-item,.icon-btn,
+ .map-corner.right button,.hub-mode-step,.hub-mode-story-back){
+ --interaction-accent:var(--space-blue);
+}
+body.ui-v15 #modal :is(.br-foot-primary,.br-inline-cta,.music-control-play),
+body.ui-v15 #screen-menu .hub-actions .hub-continue{
+ --interaction-accent:var(--space-purple);
+}
+body.ui-v15 #modal :is(.daily-claim,.reward-claim,[data-reward-action],
+ [data-roulette-action],.hub-story-reward){--interaction-accent:var(--space-yellow)}
+body.ui-v15 #modal :is(button[data-action="reset"],button[data-action="delete"],
+ .br-small-action.warn){--interaction-accent:var(--space-red)}
+body.ui-v15 #modal :is(.br-switch.active,.reward-claim.claimed){--interaction-accent:var(--space-green)}
+body.ui-v15 #screen-menu .hub-mode-story-play{--interaction-accent:var(--mode-accent,var(--space-blue))}
+body.ui-v15 #screen-menu .hub-mode-dots button.current{
+ --interaction-accent:var(--mode-accent,var(--space-blue));
+ background:var(--mode-accent,var(--space-blue))!important;
+ border-color:var(--mode-accent,var(--space-blue))!important;
+ box-shadow:0 0 10px color-mix(in srgb,var(--mode-accent) 36%,transparent)!important;
+}
+body.ui-v15 #screen-menu .hub-mode-dots button:not(.current){
+ background:#243452!important;border-color:#476080!important;
+ box-shadow:none!important;
+}
+/* Previous styles applied bright purple backgrounds to every back/tab button.
+   Replace with a uniform dark surface and the relevant blue outline. */
+body.ui-v15 #modal :is(.br-head-back,.br-foot-secondary,.br-small-action,
+ .br-tab:not(.active),.br-filter:not(.active),
+ .page-nav .back,.map-header .back,.pill-button:not(.active),
+ .icon-btn,.map-corner.right button,.game-select-trigger){
+ background:linear-gradient(155deg,#1b2848,#11182d)!important;
+ border-color:#465b8b!important;border-bottom-color:#26395e!important;
+ color:#eef3ff!important;
+ box-shadow:inset 0 1px #ffffff11,0 3px 10px #0006!important;
+}
+body.ui-v15 #modal :is(.br-tab.active,.br-filter.active,.pill-button.active){
+ --interaction-accent:var(--space-blue);
+ background:linear-gradient(155deg,#274fba,#182e75)!important;
+ border-color:var(--space-blue)!important;border-bottom-color:#162c70!important;
+ color:#fff!important;
+ box-shadow:0 0 11px #2860ff26,inset 0 1px #ffffff25!important;
+}
+body.ui-v15 #modal :is(.br-head-back,.br-foot-secondary,.br-small-action,
+ .br-tab,.br-filter,.page-nav .back,.map-header .back,.pill-button,
+ .icon-btn,.map-corner.right button,.game-select-trigger) :is(svg,.ui-icon,.ui-symbol){
+ color:inherit!important;filter:none;
+}
+body.ui-v15 #modal :is(.br-head-back,.br-foot-secondary,.br-small-action,
+ .br-tab,.br-filter,.page-nav .back,.map-header .back,.pill-button,
+ .icon-btn,.map-corner.right button,.game-select-trigger) :is(span:first-child,i){
+ border-color:color-mix(in srgb,var(--interaction-accent) 25%,#2a3455);
+}
+/* Hover must use the exact local action color, including inner decoration. */
+@media(hover:hover) and (pointer:fine){
+ body.ui-v15 #modal :is(.br-head-back,.br-foot-secondary,.br-small-action,
+  .br-tab,.br-filter,.page-nav .back,.map-header .back,.pill-button,
+  .icon-btn,.map-corner.right button,.game-select-trigger,
+  .game-select-item,.hub-mode-step,.hub-mode-story-back):not(:disabled):hover{
+  border-color:var(--interaction-accent)!important;
+  background:linear-gradient(155deg,
+    color-mix(in srgb,var(--interaction-accent) 19%,#18213c),#121a30)!important;
+  color:#fff!important;
+  box-shadow:0 0 0 1px color-mix(in srgb,var(--interaction-accent) 30%,transparent),
+    0 0 13px color-mix(in srgb,var(--interaction-accent) 34%,transparent),
+    0 4px 12px #0007!important;
+  filter:brightness(1.08)!important;
+ }
+ body.ui-v15 #modal :is(.br-head-back,.br-foot-secondary,.br-small-action,
+  .br-tab,.br-filter,.page-nav .back,.map-header .back,.pill-button,
+  .icon-btn,.map-corner.right button,.game-select-trigger,
+  .game-select-item,.hub-mode-step,.hub-mode-story-back):not(:disabled):hover :is(svg,.ui-icon,.ui-symbol){
+  color:var(--interaction-accent)!important;
+  filter:drop-shadow(0 0 4px color-mix(in srgb,var(--interaction-accent) 38%,transparent))!important;
+ }
+}
+body.ui-v15 #modal :is(.br-head-back,.br-foot-secondary,.br-small-action,
+ .br-tab,.br-filter,.page-nav .back,.map-header .back,.pill-button,
+ .icon-btn,.map-corner.right button,.game-select-trigger):focus-visible{
+ outline:2px solid var(--interaction-accent)!important;outline-offset:3px!important;
+ box-shadow:0 0 0 3px color-mix(in srgb,var(--interaction-accent) 25%,transparent)!important;
+}
+/* Zoom controls: blue border AND blue internal icon. */
+body.ui-v15 #modal #screen-map .map-corner.right button,
+body.ui-v15 #hud .camera-buttons button{
+ --interaction-accent:var(--space-blue);
+ background:linear-gradient(155deg,#1b2848,#101a30)!important;
+ border-color:#465b8b!important;color:#f5f7ff!important;
+}
+body.ui-v15 #modal #screen-map .map-corner.right button:hover .zoom-glyph,
+body.ui-v15 #hud .camera-buttons button:hover .zoom-glyph{
+ background:linear-gradient(145deg,#2a4bcb,#182b6d)!important;
+ border-color:var(--space-blue)!important;
+ box-shadow:0 0 12px #2860ff5a,inset 0 1px #ffffff25!important;
+}
+body.ui-v15 #screen-map .v15-map-details summary:hover{
+ text-shadow:0 0 8px #2860ff65!important;
+}
+/* Menu: secondary dock icons use their own colors and no purple base plates. */
+body.ui-v15 #screen-menu.hub-main-carousel .hub-story-shortcut-icon,
+body.ui-v15 #screen-menu.hub-main-carousel .hub-story-shortcut-icon :is(svg,.ui-symbol){
+ color:var(--interaction-accent)!important;
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-story-shortcut-icon{
+ background:color-mix(in srgb,var(--interaction-accent) 9%,#131d34)!important;
+ border-color:color-mix(in srgb,var(--interaction-accent) 32%,#1b2945)!important;
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-story-quick>.hub-story-reward,
+body.ui-v15 #screen-menu.hub-main-carousel .hub-story-quick>.hub-story-reward>span:first-child{
+ color:var(--space-yellow)!important;
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-story-quick>.hub-story-reward{
+ background:linear-gradient(155deg,#302919,#1b1a23)!important;
+ border-color:#756122!important;border-bottom-color:#4c401e!important;
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-story-quick>.hub-story-reward:hover{
+ background:linear-gradient(155deg,#40351c,#211f25)!important;
+ border-color:var(--space-yellow)!important;
+ box-shadow:0 0 14px #ffe50050!important;
+}
+body.ui-v15 #screen-menu .hub-mode-story-play,
+body.ui-v15 #screen-menu .hub-mode-story-play:hover{
+ border-color:var(--mode-accent,var(--space-blue))!important;
+ border-bottom-color:color-mix(in srgb,var(--mode-accent) 40%,#091121)!important;
+}
+body.ui-v15 #screen-menu .hub-mode-story-play b,
+body.ui-v15 #screen-menu .hub-mode-story-play b svg{
+ color:#fff!important;
+}
+body.ui-v15 #screen-menu .hub-mode-step:hover{
+ border-color:var(--space-blue)!important;box-shadow:0 0 12px #2860ff50!important;
+}
+body.ui-v15 #hud .v15-hud .abilities .ability-btn{
+ --interaction-accent:var(--space-blue);
+}
+body.ui-v15 #hud .v15-hud .abilities .ability-btn[data-cooling="false"]{
+ border-color:#2860ff!important;box-shadow:0 0 13px #2860ff35,0 3px 0 #0b1024!important;
+}
+body.ui-v15 #hud .v15-hud .abilities .ability-btn .ability-cooldown-label{
+ background:#182c63!important;border-color:#2860ff!important;color:#f1f5ff!important;
+}
+body.ui-v15 #hud .v15-hud .abilities .ability-btn::after{
+ background:linear-gradient(90deg,#2860ff 0 var(--ability-ready,100%),#29324c var(--ability-ready,100%))!important;
+}
+/* Responsive flow: preserve usable tap targets and guard against label clipping. */
+@media(max-width:700px){
+ body.ui-v15 #screen-menu.hub-main-carousel .hub-story-nav{
+  grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;
+  grid-template-rows:repeat(2,minmax(42px,auto));max-width:100%;
+ }
+ body.ui-v15 #screen-menu.hub-main-carousel .hub-story-shortcut{
+  min-width:0;min-height:44px;height:auto;padding:5px 3px;gap:4px;
+  flex-direction:column;justify-content:center;
+ }
+ body.ui-v15 #screen-menu.hub-main-carousel .hub-story-shortcut-label{
+  max-width:100%;white-space:normal;overflow-wrap:anywhere;
+  font-size:clamp(8px,2.25vw,10px);line-height:1.16;
+  display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+ }
+ body.ui-v15 #screen-menu.hub-main-carousel .hub-story-shortcut-icon{
+  min-height:20px;flex:0 0 20px;
+ }
+ body.ui-v15 #modal .screen :is(button,input,select){max-width:100%}
+ body.ui-v15 #modal .screen :is(.br-head,.page-nav,.hub-mode-story-top){
+  min-width:0;
+ }
+ body.ui-v15 #modal .screen :is(.br-head h2,.hub-mode-story-title,.hub-mode-story-description){
+  overflow-wrap:anywhere;min-width:0;
+ }
+}
+@media(max-width:380px){
+ body.ui-v15 #screen-menu.hub-main-carousel .hub-story-nav{gap:4px}
+ body.ui-v15 #screen-menu.hub-main-carousel .hub-story-shortcut{padding:4px 2px}
+}
+@media(prefers-reduced-motion:reduce){
+ body.ui-v15 #modal .screen button{transition:none!important}
+}
+
+
+/* v9 — saturated per-category surfaces for the eight main menu tiles.
+   No generic navy overlay, no purple inherited hover or icon box. */
+body.ui-v15 #screen-menu.hub-main-carousel .hub-story-nav .hub-story-shortcut[data-shortcut]{
+ --dock-accent:#2860ff;--dock-top:#225ad4;--dock-bottom:#0e2865;
+ --interaction-accent:var(--dock-accent);
+ background:linear-gradient(145deg,var(--dock-top),var(--dock-bottom))!important;
+ border:1px solid var(--dock-accent)!important;
+ border-bottom:4px solid color-mix(in srgb,var(--dock-accent) 43%,#070718)!important;
+ color:#fff!important;
+ box-shadow:inset 0 1px #ffffff38,0 4px 12px #0008!important;
+ isolation:isolate;
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-story-nav .hub-story-shortcut[data-shortcut="map"]{
+ --dock-accent:#2860ff;--dock-top:#235ccf;--dock-bottom:#102b70;
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-story-nav .hub-story-shortcut[data-shortcut="evolution"]{
+ --dock-accent:#a828ff;--dock-top:#8428d5;--dock-bottom:#3d147d;
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-story-nav .hub-story-shortcut[data-shortcut="achievements"]{
+ --dock-accent:#ffe500;--dock-top:#d5ad05;--dock-bottom:#765108;
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-story-nav .hub-story-shortcut[data-shortcut="music"]{
+ --dock-accent:#9922ff;--dock-top:#6f17c3;--dock-bottom:#31106c;
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-story-nav .hub-story-shortcut[data-shortcut="bestiary"]{
+ --dock-accent:#ff1744;--dock-top:#b32248;--dock-bottom:#551329;
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-story-nav .hub-story-shortcut[data-shortcut="statistics"]{
+ --dock-accent:#27ff40;--dock-top:#1ba842;--dock-bottom:#105328;
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-story-nav .hub-story-shortcut[data-shortcut="settings"]{
+ --dock-accent:#2860ff;--dock-top:#325fc0;--dock-bottom:#172f75;
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-story-nav .hub-story-shortcut[data-shortcut="new"]{
+ --dock-accent:#ff1744;--dock-top:#b51c40;--dock-bottom:#5a112b;
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-story-nav .hub-story-shortcut[data-shortcut] .hub-story-shortcut-icon{
+ background:color-mix(in srgb,var(--dock-accent) 18%,#0b1124)!important;
+ color:var(--dock-accent)!important;
+ border:1px solid color-mix(in srgb,var(--dock-accent) 55%,#111b32)!important;
+ border-radius:6px;
+ box-shadow:inset 0 1px #ffffff22!important;
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-story-nav .hub-story-shortcut[data-shortcut] .hub-story-shortcut-icon :is(svg,.ui-symbol,.hub-fallback-icon){
+ color:var(--dock-accent)!important;
+ stroke:currentColor;
+ filter:none!important;
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-story-nav .hub-story-shortcut[data-shortcut] .hub-story-shortcut-label{
+ color:#fff!important;text-shadow:0 1px 3px #000b!important;
+}
+@media(hover:hover) and (pointer:fine){
+ body.ui-v15 #screen-menu.hub-main-carousel .hub-story-nav .hub-story-shortcut[data-shortcut]:not(:disabled):hover{
+  --interaction-accent:var(--dock-accent);
+  background:linear-gradient(145deg,
+   color-mix(in srgb,var(--dock-accent) 36%,var(--dock-top)),
+   color-mix(in srgb,var(--dock-accent) 18%,var(--dock-bottom)))!important;
+  border-color:var(--dock-accent)!important;
+  box-shadow:0 0 0 1px color-mix(in srgb,var(--dock-accent) 50%,transparent),
+             0 0 22px color-mix(in srgb,var(--dock-accent) 46%,transparent),
+             0 4px 15px #0008!important;
+  filter:brightness(1.09)!important;transform:translateY(-2px)!important;
+ }
+ body.ui-v15 #screen-menu.hub-main-carousel .hub-story-nav .hub-story-shortcut[data-shortcut]:not(:disabled):hover .hub-story-shortcut-icon{
+  background:color-mix(in srgb,var(--dock-accent) 32%,#0b1124)!important;
+  border-color:var(--dock-accent)!important;
+  box-shadow:0 0 11px color-mix(in srgb,var(--dock-accent) 40%,transparent)!important;
+ }
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-story-nav .hub-story-shortcut[data-shortcut]:focus-visible{
+ outline:2px solid var(--dock-accent)!important;
+ outline-offset:3px!important;
+ box-shadow:0 0 0 3px color-mix(in srgb,var(--dock-accent) 32%,transparent)!important;
+}

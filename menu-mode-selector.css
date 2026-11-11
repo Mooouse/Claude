@@ -1,0 +1,695 @@
+/* Main-menu mode stories share the original Infinity Space Canvas background.
+   No panel-card wallpapers. The whole universe changes behind the title. */
+body.ui-v15 #screen-menu.hub-modes-open>.menu-main,
+body.ui-v15 #screen-menu.hub-modes-open>.menu-top,
+body.ui-v15 #screen-menu.hub-modes-open>.menu-foot,
+body.ui-v15 #screen-menu.hub-modes-open>.menu-orbit-info{visibility:hidden!important;pointer-events:none!important}
+body.ui-v15 #screen-menu .hub-mode-story[hidden]{display:none!important}
+body.ui-v15 #screen-menu .hub-mode-story{
+ position:absolute;inset:0;z-index:150;
+ display:flex;flex-direction:column;
+ justify-content:space-between;overflow:hidden;
+ isolation:isolate;
+ color:#f0ebff;
+ touch-action:pan-y;
+ padding:clamp(19px,3.6vw,45px) clamp(20px,5.5vw,87px);
+}
+body.ui-v15 #screen-menu .hub-mode-story::before{
+ content:"";position:absolute;inset:0;pointer-events:none;z-index:-1;
+ background:linear-gradient(90deg,
+  #060612fa 0%,#070716f4 22%,#080719d0 37%,
+  #09071680 53%,#0907160a 76%,transparent 100%),
+  linear-gradient(0deg,#0806179e 0%,transparent 26%,transparent 77%,#0404107a 100%);
+}
+body.ui-v15 #screen-menu .hub-mode-story-top{
+ position:relative;display:flex;align-items:center;gap:22px;flex:0 0 auto;
+ font-size:11px;font-weight:900;letter-spacing:.14em;color:#c4b4ef;
+ min-height:49px;
+}
+body.ui-v15 #screen-menu .hub-mode-story-back{
+ min-height:47px;display:flex;align-items:center;gap:9px;
+ padding:0 17px;border:2px solid #7660a1;
+ border-bottom:4px solid #402b70;border-radius:7px;
+ background:linear-gradient(#372450,#1c1630);
+ color:#f1eaff;font-size:11px;font-weight:950;letter-spacing:.08em;
+ transition:filter .16s,transform .16s;
+}
+body.ui-v15 #screen-menu .hub-mode-story-back:hover,
+body.ui-v15 #screen-menu .hub-mode-story-play:hover,
+body.ui-v15 #screen-menu .hub-mode-step:not(:disabled):hover{
+ filter:brightness(1.2);transform:translateY(-1px);
+}
+body.ui-v15 #screen-menu .hub-mode-story-brand{
+ display:flex;gap:12px;align-items:center;white-space:nowrap;color:#b3a1d2;font-size:10px;
+}
+body.ui-v15 #screen-menu .hub-mode-story-brand span{color:#685781}
+body.ui-v15 #screen-menu .hub-mode-story-counter{
+ color:#d4bfff;font-size:15px;font-weight:950;margin-left:auto;white-space:nowrap;
+}
+body.ui-v15 #screen-menu .hub-mode-story-copy{
+ width:min(580px,53vw);max-width:580px;
+ position:relative;
+ margin:clamp(18px,4vh,70px) 0 auto 0;
+ padding:10px 0 0;
+}
+body.ui-v15 #screen-menu .hub-mode-story-kicker{
+ margin:0 0 17px;color:#b895ff;font-size:11px;font-weight:950;
+ letter-spacing:.22em;text-transform:uppercase;
+}
+body.ui-v15 #screen-menu .hub-mode-story-title{
+ font-family:"Inter Display","Inter",system-ui,sans-serif;
+ margin:0 0 18px;
+ font-size:clamp(46px,5.3vw,86px);line-height:.97;
+ font-weight:950;letter-spacing:-.06em;
+ text-shadow:0 10px 25px #03010ebd;
+ overflow-wrap:break-word;
+}
+body.ui-v15 #screen-menu .hub-mode-story-goal{
+ display:block;margin:0 0 14px;
+ font-size:clamp(15px,1.4vw,20px);font-weight:850;color:#d6c9ff;
+ letter-spacing:-.02em;line-height:1.2;
+}
+body.ui-v15 #screen-menu .hub-mode-story-description{
+ width:min(465px,100%);margin:0 0 23px;
+ font-size:clamp(12px,1.05vw,15px);line-height:1.58;color:#c0b3d0;
+ font-weight:500;
+}
+body.ui-v15 #screen-menu .hub-mode-story-tags{
+ display:flex;align-items:center;flex-wrap:wrap;gap:9px;margin-bottom:27px;
+ max-width:570px;
+}
+body.ui-v15 #screen-menu .hub-mode-story-tags>span{
+ border:1px solid #7556aa;border-bottom:3px solid #42306a;
+ background:#211832e3;border-radius:6px;
+ color:#ded2ff;padding:9px 11px;
+ font-size:9px;font-weight:950;letter-spacing:.075em;white-space:nowrap;
+}
+body.ui-v15 #screen-menu .hub-mode-story-play{
+ border:2px solid #ae91ff;border-bottom:5px solid #3d2383;
+ display:flex;align-items:center;justify-content:space-between;
+ gap:30px;width:min(337px,100%);min-height:64px;
+ border-radius:9px;background:linear-gradient(155deg,#7650f5,#4d22c6);
+ box-shadow:0 8px 35px #30107186,inset 0 1px #c7b4ff4f;
+ color:white;padding:0 22px;font-size:14px;
+ font-weight:950;letter-spacing:.08em;
+ transition:filter .16s,transform .16s;
+}
+body.ui-v15 #screen-menu .hub-mode-story-play b{
+ font-size:23px;line-height:1;color:#e5d9ff;
+}
+body.ui-v15 #screen-menu .hub-mode-story-footer{
+ position:relative;display:flex;align-items:center;gap:13px;
+ flex:0 0 auto;min-height:54px;margin-top:clamp(18px,3vh,32px);
+}
+body.ui-v15 #screen-menu .hub-mode-step{
+ width:48px;height:46px;flex:0 0 48px;display:grid;place-items:center;
+ border:2px solid #7558ab;border-bottom:4px solid #3d2b67;
+ background:#251a3bdf;border-radius:7px;
+ font-size:29px;line-height:1;color:#f2eaff;
+ transition:transform .16s,filter .16s;
+}
+body.ui-v15 #screen-menu .hub-mode-step:disabled{
+ opacity:.38;cursor:default;
+}
+body.ui-v15 #screen-menu .hub-mode-dots{display:flex;align-items:center;gap:9px}
+body.ui-v15 #screen-menu .hub-mode-dots button{
+ border:1px solid #6f57a5;display:block;width:21px;height:9px;
+ border-radius:5px;background:#534277;transition:width .18s,background .18s;
+}
+body.ui-v15 #screen-menu .hub-mode-dots button.current{
+ width:43px;border-color:#bd9eff;background:#a786f6;
+}
+body.ui-v15 #screen-menu .hub-mode-gesture{
+ color:#9284b3;letter-spacing:.11em;font-size:10px;
+ font-weight:950;margin-left:21px;white-space:nowrap;
+}
+@media(max-width:1050px){
+ body.ui-v15 #screen-menu .hub-mode-story-copy{width:min(545px,62vw)}
+ body.ui-v15 #screen-menu .hub-mode-story-title{font-size:clamp(43px,5.8vw,74px)}
+ body.ui-v15 #screen-menu .hub-mode-story-gesture{display:none}
+}
+@media(max-width:700px){
+ body.ui-v15 #screen-menu .hub-mode-story{
+  padding:calc(max(10px,env(safe-area-inset-top)) + 9px) 16px calc(max(8px,env(safe-area-inset-bottom)) + 8px);
+ }
+ body.ui-v15 #screen-menu .hub-mode-story::before{
+  background:linear-gradient(0deg,#050410fa 0%,#060513f5 31%,
+    #05051291 58%,#05041412 85%,transparent 100%),
+    linear-gradient(90deg,#0504104f,transparent 68%);
+ }
+ body.ui-v15 #screen-menu .hub-mode-story-top{gap:8px;min-height:40px}
+ body.ui-v15 #screen-menu .hub-mode-story-back{
+  padding:0 11px;min-height:38px;font-size:10px;gap:5px;border-bottom-width:3px;
+ }
+ body.ui-v15 #screen-menu .hub-mode-story-brand{
+  font-size:8px;white-space:normal;flex:1;min-width:0;gap:4px;
+ }
+ body.ui-v15 #screen-menu .hub-mode-story-counter{font-size:11px}
+ body.ui-v15 #screen-menu .hub-mode-story-copy{
+  margin:auto 0 0;padding:0;width:100%;max-width:100%;
+ }
+ body.ui-v15 #screen-menu .hub-mode-story-kicker{
+  font-size:9px;letter-spacing:.11em;margin:0 0 8px;
+ }
+ body.ui-v15 #screen-menu .hub-mode-story-title{
+  font-size:clamp(38px,9vw,58px);line-height:.96;margin:0 0 8px;
+ }
+ body.ui-v15 #screen-menu .hub-mode-story-goal{
+  font-size:14px;margin-bottom:6px;line-height:1.2;
+ }
+ body.ui-v15 #screen-menu .hub-mode-story-description{
+  font-size:11px;line-height:1.42;max-width:95%;margin-bottom:11px;
+  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;
+ }
+ body.ui-v15 #screen-menu .hub-mode-story-tags{
+  gap:5px;margin-bottom:12px;max-width:100%;
+ }
+ body.ui-v15 #screen-menu .hub-mode-story-tags>span{
+  font-size:8px;padding:6px 7px;letter-spacing:.02em;border-bottom-width:2px;
+ }
+ body.ui-v15 #screen-menu .hub-mode-story-play{
+  min-height:46px;padding:0 14px;width:100%;border-bottom-width:4px;
+  font-size:11px;
+ }
+ body.ui-v15 #screen-menu .hub-mode-story-footer{
+  min-height:43px;gap:8px;margin-top:10px;flex-wrap:nowrap;
+ }
+ body.ui-v15 #screen-menu .hub-mode-step{
+  width:43px;flex-basis:43px;height:39px;font-size:25px;border-bottom-width:3px;
+ }
+ body.ui-v15 #screen-menu .hub-mode-dots{gap:5px;flex:1;justify-content:center}
+ body.ui-v15 #screen-menu .hub-mode-dots button{width:15px;height:8px}
+ body.ui-v15 #screen-menu .hub-mode-dots button.current{width:26px}
+ body.ui-v15 #screen-menu .hub-mode-gesture{display:none}
+}
+@media(max-height:650px) and (min-width:701px){
+ body.ui-v15 #screen-menu .hub-mode-story{padding:14px 36px}
+ body.ui-v15 #screen-menu .hub-mode-story-copy{margin:auto 0 0;width:min(520px,62vw)}
+ body.ui-v15 #screen-menu .hub-mode-story-title{font-size:47px;margin-bottom:11px}
+ body.ui-v15 #screen-menu .hub-mode-story-description{font-size:11px;margin-bottom:11px;line-height:1.3}
+ body.ui-v15 #screen-menu .hub-mode-story-tags{margin-bottom:12px;gap:6px}
+ body.ui-v15 #screen-menu .hub-mode-story-tags>span{padding:6px 8px}
+ body.ui-v15 #screen-menu .hub-mode-story-play{min-height:48px}
+ body.ui-v15 #screen-menu .hub-mode-story-footer{margin-top:10px}
+}
+@media(max-height:570px) and (max-width:700px){
+ body.ui-v15 #screen-menu .hub-mode-story-title{font-size:33px}
+ body.ui-v15 #screen-menu .hub-mode-story-description{-webkit-line-clamp:2}
+ body.ui-v15 #screen-menu .hub-mode-story-tags{margin-bottom:8px}
+ body.ui-v15 #screen-menu .hub-mode-story-footer{margin-top:6px}
+}
+@media(prefers-reduced-motion:reduce){
+ body.ui-v15 #screen-menu .hub-mode-story :is(button,span){transition:none!important}
+}
+
+
+/* v3.66 — the mode selector IS the main menu. No launcher, secondary page or modal. */
+body.ui-v15 #screen-menu.hub-main-carousel{
+ display:block;
+}
+body.ui-v15 #screen-menu.hub-main-carousel>.menu-orbit-info,
+body.ui-v15 #screen-menu.hub-main-carousel>.menu-foot{
+ display:none!important;
+}
+/* Existing language, sound and settings controls remain operational at the
+   upper right while the universe and selected mode occupy the home screen. */
+body.ui-v15 #screen-menu.hub-main-carousel>.menu-top{
+ position:absolute!important;top:15px!important;right:24px!important;left:auto!important;
+ z-index:205!important;width:auto!important;max-width:60vw;
+ visibility:visible!important;pointer-events:auto!important;
+ display:flex!important;gap:10px!important;align-items:center!important;
+}
+body.ui-v15 #screen-menu.hub-main-carousel>.menu-top .small-brand,
+body.ui-v15 #screen-menu.hub-main-carousel>.menu-top .micro{
+ display:none!important;
+}
+body.ui-v15 #screen-menu.hub-main-carousel>.menu-top .language-control,
+body.ui-v15 #screen-menu.hub-main-carousel>.menu-top .menu-actions{
+ pointer-events:auto!important;
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-mode-story{
+ display:flex!important;
+ padding-top:77px;
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-mode-story-top{
+ margin-top:0;
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-mode-story-brand{
+ max-width:calc(100% - 225px);
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-mode-story-back{
+ position:relative;z-index:4;
+}
+/* The old dense hub becomes a compact optional drawer with all of its native
+   working controls. It never obscures or replaces the main menu by default. */
+body.ui-v15 #screen-menu.hub-main-carousel>.menu-main.hub-menu{
+ visibility:hidden!important;pointer-events:none!important;
+ opacity:0!important;
+ position:absolute!important;z-index:190!important;
+ top:140px!important;left:clamp(15px,5.5vw,87px)!important;right:auto!important;
+ width:min(445px,calc(100vw - 30px))!important;
+ max-height:calc(100dvh - 151px)!important;
+ padding:18px 17px 20px!important;
+ overflow-x:hidden!important;overflow-y:auto!important;
+ background:linear-gradient(155deg,#1c1233fa,#0b0a1dfa)!important;
+ border:2px solid #8769bd;border-bottom:5px solid #49307b;
+ border-radius:11px;
+ box-shadow:0 24px 80px #030009e3,0 0 0 100vmax #0605117a;
+ transform:translateX(-14px);transition:opacity .2s,transform .2s,visibility .2s;
+ overscroll-behavior:contain;
+}
+body.ui-v15 #screen-menu.hub-main-carousel.hub-options-open>.menu-main.hub-menu{
+ visibility:visible!important;pointer-events:auto!important;
+ opacity:1!important;transform:translateX(0);
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-menu::before{
+ content:attr(data-title);display:block;
+ font-size:12px;line-height:1.3;font-weight:950;letter-spacing:.16em;
+ color:#d8c3ff;margin-bottom:15px;
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-menu>.eyeline,
+body.ui-v15 #screen-menu.hub-main-carousel .hub-menu>.hero-title,
+body.ui-v15 #screen-menu.hub-main-carousel .hub-menu>.hero-desc{
+ display:none!important;
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-menu .hub-actions{
+ display:block!important;grid-template-columns:none!important;
+ margin:0!important;
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-menu .hub-continue{
+ display:none!important;
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-menu .hub-new-world{
+ display:flex!important;width:100%!important;height:43px!important;
+ min-height:43px!important;
+ font-size:10px!important;
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-menu .hub-current{
+ margin:12px 0 0!important;
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-menu .hub-progress,
+body.ui-v15 #screen-menu.hub-main-carousel .hub-menu .hub-bonuses{
+ margin-top:15px!important;
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-menu .hub-progress-grid{
+ gap:7px!important;
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-menu .hub-progress-tile{
+ min-height:45px!important;height:45px!important;
+ padding:5px 8px!important;font-size:10px!important;
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-menu .hub-utility-row{
+ grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:7px!important;
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-menu .hub-utility-row>.hub-more-button{
+ grid-column:1/-1;
+ height:36px!important;justify-content:center!important;
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-menu .hub-section-head small{
+ display:none;
+}
+body.ui-v15 #screen-menu.hub-main-carousel.hub-options-open .hub-mode-story-copy,
+body.ui-v15 #screen-menu.hub-main-carousel.hub-options-open .hub-mode-story-footer{
+ opacity:.36;pointer-events:none;
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-mode-story-back[aria-expanded="true"]{
+ background:linear-gradient(160deg,#7044d6,#4d22c6);
+ border-color:#b6a0ff;
+}
+@media(max-width:700px){
+ body.ui-v15 #screen-menu.hub-main-carousel>.menu-top{
+  top:12px!important;right:12px!important;max-width:66vw;
+  gap:6px!important;
+ }
+ body.ui-v15 #screen-menu.hub-main-carousel>.menu-top .menu-actions{
+  gap:5px!important;margin:0!important;
+ }
+ body.ui-v15 #screen-menu.hub-main-carousel .hub-mode-story{
+  padding-top:max(76px,calc(env(safe-area-inset-top) + 66px))!important;
+ }
+ body.ui-v15 #screen-menu.hub-main-carousel .hub-mode-story-brand{
+  display:none;
+ }
+ body.ui-v15 #screen-menu.hub-main-carousel .hub-mode-story-top{
+  min-height:40px!important;
+ }
+ body.ui-v15 #screen-menu.hub-main-carousel>.menu-main.hub-menu{
+  top:max(125px,calc(env(safe-area-inset-top) + 109px))!important;
+  left:11px!important;right:11px!important;width:auto!important;
+  max-height:calc(100dvh - max(136px,env(safe-area-inset-top) + 120px))!important;
+  padding:13px 12px 18px!important;
+ }
+ body.ui-v15 #screen-menu.hub-main-carousel .hub-menu .hub-progress-tile{
+  font-size:10px!important;
+ }
+}
+@media(max-height:580px){
+ body.ui-v15 #screen-menu.hub-main-carousel .hub-mode-story{
+  padding-top:57px!important;
+ }
+ body.ui-v15 #screen-menu.hub-main-carousel>.menu-top{top:8px!important;}
+ body.ui-v15 #screen-menu.hub-main-carousel>.menu-main.hub-menu{
+  top:105px!important;max-height:calc(100dvh - 115px)!important;
+ }
+}
+
+/* Reward shortcuts are native buttons on the first mode scene, with concise
+   icon-only chrome and accessible text for screen readers. */
+body.ui-v15 #screen-menu.hub-main-carousel .hub-story-quick{
+ display:flex;align-items:center;justify-content:center;gap:8px;
+ flex:none;
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-story-quick>.hub-story-reward{
+ width:43px!important;height:43px!important;min-width:43px!important;min-height:43px!important;
+ padding:0!important;box-sizing:border-box;
+ display:grid!important;place-items:center!important;
+ flex:0 0 43px!important;
+ border:2px solid #6e53a3!important;border-bottom:4px solid #3c286d!important;
+ border-radius:8px!important;color:#d8c6ff!important;
+ background:linear-gradient(175deg,#33204df4,#1b142eef)!important;
+ cursor:pointer!important;position:relative!important;
+ transition:border-color .16s,background .16s,filter .16s;
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-story-quick>.hub-story-reward:hover{
+ border-color:#b391fb!important;background:#402563!important;filter:brightness(1.12);
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-story-quick>.hub-story-reward>span:first-child{
+ display:grid!important;place-items:center!important;
+ flex:none!important;width:29px!important;height:29px!important;margin:0!important;
+ color:#d4bbff!important;border:0!important;background:transparent!important;
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-story-quick>.hub-story-reward svg{
+ width:22px!important;height:22px!important;
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-story-quick>.hub-story-reward>span:nth-child(2),
+body.ui-v15 #screen-menu.hub-main-carousel .hub-story-quick>.hub-story-reward>span:nth-child(3){
+ display:none!important;
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-story-quick>.hub-story-reward.reward-available::after{
+ content:"";position:absolute;top:4px;right:4px;
+ width:7px;height:7px;border-radius:50%;
+ background:#d5b4ff;box-shadow:0 0 8px #a677ff;
+}
+@media(max-width:700px){
+ body.ui-v15 #screen-menu.hub-main-carousel .hub-story-quick{gap:5px;margin-left:auto}
+ body.ui-v15 #screen-menu.hub-main-carousel .hub-story-quick>.hub-story-reward{
+  width:35px!important;height:38px!important;min-width:35px!important;min-height:38px!important;
+  flex-basis:35px!important;border-bottom-width:3px!important;
+ }
+ body.ui-v15 #screen-menu.hub-main-carousel .hub-story-quick>.hub-story-reward svg{width:20px!important;height:20px!important}
+}
+
+
+/* v3.67 — Always-visible real navigation, plus spring-soft carousel movement. */
+body.ui-v15 #screen-menu.hub-main-carousel .hub-mode-story{
+ padding-bottom:clamp(13px,2vw,22px)!important;
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-story-nav{
+ position:relative;z-index:5;
+ display:grid;
+ grid-template-columns:repeat(8,minmax(0,1fr));
+ align-items:stretch;gap:8px;
+ width:100%;min-width:0;
+ margin-top:12px;padding-top:12px;
+ border-top:1px solid #b79deb4a;
+ flex:0 0 auto;
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-story-shortcut{
+ box-sizing:border-box;display:flex;align-items:center;justify-content:center;
+ gap:8px;min-width:0;min-height:56px;padding:7px 8px;
+ border:1px solid #8066ad!important;border-bottom:4px solid #3f2a6e!important;
+ border-radius:8px!important;
+ background:linear-gradient(180deg,#2f2349e8,#151026f0)!important;
+ color:#ede5ff!important;
+ font:850 10px/1.2 "Inter",system-ui,sans-serif;
+ letter-spacing:.015em;cursor:pointer;
+ box-shadow:inset 0 1px #bfb0e319,0 4px 12px #0005;
+ transition:transform .22s cubic-bezier(.2,.75,.2,1),filter .2s,border-color .2s,background .2s;
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-story-shortcut:hover{
+ background:linear-gradient(180deg,#452f6a,#241a42)!important;
+ border-color:#b393f0!important;
+ transform:translateY(-2px);
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-story-shortcut:active{transform:translateY(0)}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-story-shortcut:focus-visible{
+ outline:2px solid #d7bfff;outline-offset:2px;
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-story-shortcut-icon{
+ flex:0 0 25px;display:grid;place-items:center;
+ width:25px;height:29px;color:#c7aeff;
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-story-shortcut-icon svg{
+ width:22px;height:22px;
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-story-shortcut-label{
+ min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-story-shortcut[data-shortcut="new"]{
+ border-color:#825fb9!important;background:linear-gradient(180deg,#352356,#1a1334)!important;
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-story-shortcut[data-shortcut="settings"]{
+ border-color:#8d70c2!important;
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-mode-story-copy{
+ transform:translate3d(var(--hub-swipe-offset,0px),0,0);
+ will-change:transform,opacity;
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-mode-story:not(.hub-dragging) .hub-mode-story-copy{
+ transition:transform .25s cubic-bezier(.16,1,.3,1);
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-mode-story-footer{
+ margin-top:clamp(10px,1.5vh,18px);
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-mode-step,
+body.ui-v15 #screen-menu.hub-main-carousel .hub-mode-dots button{
+ transition:width .38s cubic-bezier(.2,.8,.15,1),background .35s,
+ transform .27s cubic-bezier(.2,.8,.2,1);
+}
+@media(max-width:1150px){
+ body.ui-v15 #screen-menu.hub-main-carousel .hub-story-shortcut{
+  gap:5px;flex-direction:column;padding:6px 5px;min-height:58px;font-size:9px;
+ }
+ body.ui-v15 #screen-menu.hub-main-carousel .hub-story-shortcut-icon{
+  width:22px;height:22px;flex-basis:22px;
+ }
+}
+@media(max-width:700px){
+ body.ui-v15 #screen-menu.hub-main-carousel .hub-story-nav{
+  grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:repeat(2,42px);
+  gap:5px;margin-top:8px;padding-top:7px;
+ }
+ body.ui-v15 #screen-menu.hub-main-carousel .hub-story-shortcut{
+  min-height:42px;height:42px;flex-direction:row;gap:5px;
+  padding:4px 5px;font-size:8.8px;border-radius:6px!important;
+  border-bottom-width:3px!important;
+ }
+ body.ui-v15 #screen-menu.hub-main-carousel .hub-story-shortcut-icon{
+  flex:0 0 17px;width:17px;height:20px;
+ }
+ body.ui-v15 #screen-menu.hub-main-carousel .hub-story-shortcut-icon svg{
+  width:17px;height:17px;
+ }
+ body.ui-v15 #screen-menu.hub-main-carousel .hub-mode-story-copy{padding-bottom:0}
+ body.ui-v15 #screen-menu.hub-main-carousel .hub-mode-story-footer{
+  margin-top:7px!important;min-height:40px!important;
+ }
+ body.ui-v15 #screen-menu.hub-main-carousel .hub-mode-story-play{
+  min-height:43px!important;
+ }
+ body.ui-v15 #screen-menu.hub-main-carousel .hub-mode-story-description{
+  margin-bottom:9px!important;
+ }
+ body.ui-v15 #screen-menu.hub-main-carousel .hub-mode-story-tags{
+  margin-bottom:9px!important;
+ }
+}
+@media(max-height:680px) and (min-width:701px){
+ body.ui-v15 #screen-menu.hub-main-carousel .hub-story-nav{margin-top:7px;padding-top:8px}
+ body.ui-v15 #screen-menu.hub-main-carousel .hub-story-shortcut{min-height:42px;height:42px}
+ body.ui-v15 #screen-menu.hub-main-carousel .hub-mode-story-title{font-size:clamp(37px,4.2vw,56px)}
+ body.ui-v15 #screen-menu.hub-main-carousel .hub-mode-story-description{max-height:56px;overflow:hidden}
+ body.ui-v15 #screen-menu.hub-main-carousel .hub-mode-story-copy{margin-top:auto}
+}
+@media(max-height:590px) and (max-width:700px){
+ body.ui-v15 #screen-menu.hub-main-carousel .hub-mode-story-description{
+  -webkit-line-clamp:2!important;
+ }
+ body.ui-v15 #screen-menu.hub-main-carousel .hub-mode-story-tags>span:last-child{display:none}
+ body.ui-v15 #screen-menu.hub-main-carousel .hub-story-nav{
+  grid-template-rows:repeat(2,36px);
+ }
+ body.ui-v15 #screen-menu.hub-main-carousel .hub-story-shortcut{
+  min-height:36px;height:36px;
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ body.ui-v15 #screen-menu.hub-main-carousel .hub-story-shortcut,
+ body.ui-v15 #screen-menu.hub-main-carousel .hub-mode-story-copy,
+ body.ui-v15 #screen-menu.hub-main-carousel .hub-mode-step{transition:none!important}
+}
+
+/* The universe map is a campaign feature. Hide it for all competitive modes,
+   including the bottom dock and the optional secondary sections drawer. */
+body.ui-v15 #screen-menu.hub-main-carousel:not(.hub-mode-endless) .hub-story-shortcut[data-shortcut="map"],
+body.ui-v15 #screen-menu.hub-main-carousel:not(.hub-mode-endless) .hub-progress-tile[data-page="map"]{
+ display:none!important;visibility:hidden!important;pointer-events:none!important;
+}
+
+/* v3.69 — real AI-only matches replace decorative space mode backgrounds. */
+body.ui-v15 #screen-menu.hub-main-carousel .hub-live-demo{
+ position:absolute;inset:0;overflow:hidden;pointer-events:none;
+ z-index:-2;contain:layout paint;
+ background:transparent;
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-demo-frame{
+ position:absolute;inset:-1px;
+ pointer-events:none;opacity:0;
+ transition:opacity .95s cubic-bezier(.22,.82,.17,1);
+ will-change:opacity;
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-demo-frame.ready{opacity:1}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-demo-frame iframe{
+ position:absolute;inset:0;width:100%;height:100%;
+ display:block;border:0;overflow:hidden;
+ pointer-events:none;user-select:none;
+ object-fit:cover;
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-mode-story::before{
+ background:linear-gradient(90deg,#04050bf9 0%,#060615ef 25%,
+  #08071cbd 43%,#05041159 62%,#05041113 86%),
+ linear-gradient(0deg,#080617ab 0%,transparent 31%,transparent 76%,#040510a1 100%);
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-mode-story-top{
+ gap:10px;
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-profile-chip{
+ z-index:2;flex:0 1 auto;margin-left:auto;
+ min-width:0;max-width:165px;
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-story-quick{
+ margin-left:0;
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-mode-story-counter{
+ margin-left:7px;flex:none;
+}
+@media(max-width:700px){
+ body.ui-v15 #screen-menu.hub-main-carousel .hub-mode-story::before{
+  background:linear-gradient(0deg,#040410fc 0%,#050613f3 29%,
+   #060719b5 56%,#03040a26 85%,transparent 100%);
+ }
+ body.ui-v15 #screen-menu.hub-main-carousel .hub-profile-chip{
+  max-width:89px;margin-left:auto;padding:0 5px;font-size:9px;
+ }
+ body.ui-v15 #screen-menu.hub-main-carousel .hub-mode-story-counter{
+  margin-left:2px;font-size:10px;
+ }
+ body.ui-v15 #screen-menu.hub-main-carousel .hub-mode-story-home{
+  white-space:nowrap;max-width:85px;overflow:hidden;text-overflow:clip;
+  font-size:9px;
+ }
+ body.ui-v15 #screen-menu.hub-main-carousel .hub-mode-story-top{
+  gap:5px;
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ body.ui-v15 #screen-menu.hub-main-carousel .hub-demo-frame{transition:none}
+}
+
+
+/* v3.71 — unified mode layout: no orphaned Cyrillic letters, centered
+   carousel controls, and the same angular icon geometry across buttons. */
+body.ui-v15 #screen-menu.hub-main-carousel .hub-mode-story-copy{
+ width:min(720px,100%);max-width:100%;min-width:0;
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-mode-story-title{
+ font-size:clamp(39px,4.5vw,76px);
+ line-height:1.01;letter-spacing:-.055em;
+ text-wrap:balance;overflow-wrap:normal;word-break:normal;hyphens:none;
+ max-width:100%;
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-mode-story-footer{
+ box-sizing:border-box;display:flex;flex-direction:column;
+ align-items:center;justify-content:center;gap:7px;
+ width:100%;min-width:0;min-height:75px;
+ padding:0;margin-inline:auto;
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-mode-nav-controls{
+ display:flex;align-items:center;justify-content:center;
+ gap:clamp(9px,1.5vw,14px);width:max-content;max-width:100%;
+ margin-inline:auto;
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-mode-nav-controls .hub-mode-dots{
+ display:flex;align-items:center;justify-content:center;
+ flex:0 1 auto;min-width:0;
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-mode-step{
+ display:grid;place-items:center;padding:0;line-height:1;
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-mode-step svg{
+ display:block;width:20px;height:20px;flex:none;
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-mode-gesture{
+ display:block;margin:0;max-width:100%;white-space:normal;
+ color:#ada0cb;font-size:9px;line-height:1.25;
+ letter-spacing:.075em;text-align:center;
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-mode-story-play b{
+ display:grid;place-items:center;flex:0 0 30px;width:30px;height:30px;
+ color:#f2eaff;
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-mode-story-play b svg{
+ display:block;width:25px;height:25px;
+}
+@media(max-width:700px){
+ body.ui-v15 #screen-menu.hub-main-carousel .hub-mode-story-copy{
+  width:100%;max-width:100%;
+ }
+ body.ui-v15 #screen-menu.hub-main-carousel .hub-mode-story-title{
+  font-size:clamp(33px,8.4vw,54px);line-height:1.02;
+ }
+ body.ui-v15 #screen-menu.hub-main-carousel .hub-mode-story-footer{
+  min-height:44px!important;gap:0;
+ }
+ body.ui-v15 #screen-menu.hub-main-carousel .hub-mode-gesture{display:none}
+ body.ui-v15 #screen-menu.hub-main-carousel .hub-mode-nav-controls{gap:8px}
+ body.ui-v15 #screen-menu.hub-main-carousel .hub-mode-nav-controls .hub-mode-dots{
+  flex:0 1 auto;gap:5px;
+ }
+ body.ui-v15 #screen-menu.hub-main-carousel .hub-mode-step svg{width:18px;height:18px}
+ body.ui-v15 #screen-menu.hub-main-carousel .hub-mode-story-play b{
+  width:25px;height:25px;flex-basis:25px;
+ }
+ body.ui-v15 #screen-menu.hub-main-carousel .hub-mode-story-play b svg{width:21px;height:21px}
+}
+@media(max-width:380px){
+ body.ui-v15 #screen-menu.hub-main-carousel .hub-mode-story-title{
+  font-size:clamp(27px,8vw,33px);letter-spacing:-.045em;
+ }
+}
+@media(max-height:760px) and (min-width:701px){
+ body.ui-v15 #screen-menu.hub-main-carousel .hub-mode-story-title{
+  font-size:clamp(34px,4.1vw,58px);
+ }
+ body.ui-v15 #screen-menu.hub-main-carousel .hub-mode-story-footer{
+  min-height:62px;gap:4px;margin-top:7px;
+ }
+ body.ui-v15 #screen-menu.hub-main-carousel .hub-mode-story-copy{
+  margin-top:auto;
+ }
+}
+
+/* v3.71.1 — dock labels must never clip or visually escape their buttons. */
+body.ui-v15 #screen-menu.hub-main-carousel .hub-story-shortcut{
+ min-width:0;overflow:hidden;text-align:center;
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-story-shortcut-label{
+ display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+ min-width:0;max-width:100%;white-space:normal;overflow:hidden;
+ text-overflow:clip;overflow-wrap:anywhere;line-height:1.15;
+}
+@media(max-width:700px){
+ body.ui-v15 #screen-menu.hub-main-carousel .hub-story-shortcut-label{
+  font-size:clamp(8px,2.3vw,10px);
+ }
+}

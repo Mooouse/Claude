@@ -1,0 +1,671 @@
+/* Infinity Space v3.50 — galactic rainbow roulette & expanded tester */
+body.ui-v15 #modal:is([data-screen="roulette"],[data-screen="daily"]) .modal-card:has(.daily-screen){
+ background:
+  radial-gradient(ellipse at 87% 13%,rgba(100,40,169,.22),transparent 43%),
+  radial-gradient(ellipse at 4% 87%,rgba(26,80,165,.16),transparent 44%),
+  linear-gradient(145deg,#110b24 0%,#100c1f 60%,#151029 100%)!important;
+}
+body.ui-v15 #modal:is([data-screen="roulette"],[data-screen="daily"]) .daily-screen::before{
+ content:"";position:absolute;inset:5px;z-index:0;pointer-events:none;opacity:.45;
+ background-image:
+  radial-gradient(circle at 9% 11%,#d5b9ff 0 1px,transparent 1.8px),
+  radial-gradient(circle at 24% 68%,#a4caff 0 1px,transparent 1.8px),
+  radial-gradient(circle at 60% 7%,#fff0c1 0 1px,transparent 1.8px),
+  radial-gradient(circle at 83% 77%,#efb2e9 0 1px,transparent 1.8px),
+  radial-gradient(circle at 46% 54%,#ac94df 0 .6px,transparent 1.6px),
+  radial-gradient(circle at 73% 41%,#ffffff 0 1px,transparent 2px);
+ background-size:330px 240px,270px 210px,370px 280px,260px 320px,190px 230px,430px 300px;
+}
+body.ui-v15 #modal:is([data-screen="roulette"],[data-screen="daily"]) .daily-screen>*{
+ position:relative;z-index:1;
+}
+body.ui-v15 #modal[data-screen="roulette"] .daily-roulette-body{
+ background:
+  radial-gradient(ellipse at 16% 55%,rgba(30,96,186,.17),transparent 41%),
+  radial-gradient(ellipse at 55% 35%,rgba(155,56,175,.10),transparent 60%);
+ border-radius:8px;
+}
+body.ui-v15 #modal[data-screen="roulette"] .daily-wheel-stage:before{
+ width:340px;max-width:100%;
+ box-shadow:0 0 65px #4940c388,0 0 95px #2860ff30,0 0 150px #d047ad1c;
+}
+body.ui-v15 #modal[data-screen="roulette"] .roulette-disc-svg{
+ filter:drop-shadow(0 0 11px #543aa6aa) drop-shadow(0 7px 16px #040211bd);
+}
+body.ui-v15 #modal[data-screen="roulette"] .daily-wheel-pointer span{
+ background:linear-gradient(125deg,#fff1b3,#ffc96b 48%,#df8149);
+ filter:drop-shadow(0 0 6px #fbc97866);
+}
+body.ui-v15 #modal[data-screen="roulette"] .roulette-wheel-base{
+ background:radial-gradient(ellipse,#9967df88,#2954c54a 36%,transparent 74%);
+}
+body.ui-v15 #modal[data-screen="roulette"] .roulette-prizes-title{
+ color:#e5daff;
+}
+body.ui-v15 #modal[data-screen="roulette"] .daily-wheel-legend-item{
+ background:linear-gradient(155deg,rgba(36,24,63,.92),rgba(17,16,38,.95))!important;
+}
+body.ui-v15 #modal[data-screen="roulette"] .daily-wheel-legend-item:nth-child(1) i{background:#ee4e6d;box-shadow:0 0 10px #ee4e6d55}
+body.ui-v15 #modal[data-screen="roulette"] .daily-wheel-legend-item:nth-child(2) i{background:#ffa439;box-shadow:0 0 10px #ffa43955}
+body.ui-v15 #modal[data-screen="roulette"] .daily-wheel-legend-item:nth-child(3) i{background:#f7d44a;box-shadow:0 0 10px #f7d44a55}
+body.ui-v15 #modal[data-screen="roulette"] .daily-wheel-legend-item:nth-child(4) i{background:#41d184;box-shadow:0 0 10px #41d18455}
+body.ui-v15 #modal[data-screen="roulette"] .daily-wheel-legend-item:nth-child(5) i{background:#2860ff;box-shadow:0 0 10px #2860ff55}
+body.ui-v15 #modal[data-screen="roulette"] .daily-wheel-legend-item:nth-child(6) i{background:#438ef4;box-shadow:0 0 10px #438ef455}
+body.ui-v15 #modal[data-screen="roulette"] .daily-wheel-legend-item:nth-child(7) i{background:#e969c4;box-shadow:0 0 10px #e969c455}
+body.ui-v15 #modal[data-screen="roulette"] .daily-wheel-legend-item:nth-child(8) i{background:#ffe4a0;box-shadow:0 0 10px #ffe4a077}
+body.ui-v15 #modal[data-screen="roulette"] .daily-wheel-legend-item:last-child{
+ background:linear-gradient(135deg,#533b36,#27203e)!important;
+ border-color:#bc9466!important;
+}
+body.ui-v15 #modal[data-screen="roulette"] .daily-wheel-legend-item.daily-wheel-winner{
+ background:linear-gradient(135deg,#503e70,#261b46)!important;
+ border-color:#ffe4a0!important;
+ box-shadow:0 0 19px #dbae6880!important;
+}
+/* Expanded test controls: visible only on ?tester=1 because the whole panel is hidden there otherwise. */
+body.ui-v15 .tester-panel{
+ width:min(414px,calc(100vw - 22px));
+ background:linear-gradient(155deg,#1b112f,#110c21 90%)!important;
+ border:2px solid #674699!important;border-bottom:4px solid #3e2467!important;
+ box-shadow:0 28px 75px #000b;
+ scrollbar-color:#7250ad transparent;
+}
+body.ui-v15 .tester-panel .tester-header{
+ border-color:#5b437f;
+}
+body.ui-v15 .tester-panel .tester-line{
+ border-color:#37244f;
+ font-size:12px;
+}
+body.ui-v15 .tester-panel .tester-line b{color:#d1b2ff}
+body.ui-v15 .tester-panel .tester-line input[type=number],
+body.ui-v15 .tester-panel .tester-line select{
+ background:#231637;color:#f5eaff;
+ border:1px solid #7253a3;border-bottom:3px solid #402b62;border-radius:5px;
+ min-height:40px;
+}
+body.ui-v15 .tester-panel .tester-line input[type=range]{
+ accent-color:#8e62e7;
+}
+body.ui-v15 .tester-rewards{
+ margin:18px 0 14px;padding:15px 12px;
+ background:linear-gradient(160deg,#241735,#170f28);
+ border:1px solid #5f4489;border-bottom:4px solid #3d275e;border-radius:7px;
+}
+body.ui-v15 .tester-rewards h3{
+ margin:0 0 11px;font-size:15px;line-height:1.2;font-weight:950;
+ color:#f3eaff;letter-spacing:.035em;
+}
+body.ui-v15 .tester-rewards-status{
+ padding:11px;margin:0 0 8px;
+ border-radius:5px;border-left:4px solid #9f78dc;
+ background:#34224f;color:#eadbff;
+ font-size:11px;line-height:1.5;font-weight:700;
+}
+body.ui-v15 .tester-reward-buttons{
+ display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;
+ margin:12px 0 0;
+}
+body.ui-v15 .tester-reward-buttons button{
+ display:flex;align-items:center;justify-content:center;
+ min-height:46px;padding:9px 7px;
+ border:1px solid #8060b3;border-bottom:4px solid #493072;border-radius:5px;
+ background:linear-gradient(150deg,#382250,#25193e);
+ color:#f1e9ff;font-size:11px;font-weight:850;line-height:1.25;
+ cursor:pointer;
+ transition:background .15s,transform .15s;
+}
+body.ui-v15 .tester-reward-buttons button:hover{
+ background:linear-gradient(150deg,#58338b,#32205a);
+ border-color:#ba9bf8;transform:translateY(-1px);
+}
+body.ui-v15 .tester-reward-buttons #tester-force-spin{
+ background:linear-gradient(120deg,#6532c1,#48208e);
+ border-color:#aa85f0;
+}
+body.ui-v15 .tester-reward-buttons button.danger{
+ color:#ffc8cc;background:#512739;border-color:#a45678;border-bottom-color:#652337;
+}
+body.ui-v15 .tester-odds-result{
+ white-space:pre-line;overflow-wrap:anywhere;
+ margin-top:10px;color:#d7c8e9;font-size:11px;line-height:1.65;
+}
+body.ui-v15 .tester-reward-note{
+ color:#aa95c3;font-size:11px;line-height:1.45;margin:10px 0 0;
+}
+@media(max-width:500px){
+ body.ui-v15 .tester-panel{right:5px;top:62px;max-height:calc(100dvh - 67px);width:calc(100vw - 10px)}
+ body.ui-v15 .tester-reward-buttons button{font-size:11px;min-height:47px}
+}
+@media(prefers-reduced-motion:reduce){
+ body.ui-v15 .tester-reward-buttons button{transition:none}
+}
+
+
+/* v3.51 — same clustered star map as the game's sky, rather than painted wedges. */
+body.ui-v15 #modal[data-screen="roulette"] .daily-wheel.spinning{
+ transition:transform 7.2s cubic-bezier(.48,0,.12,1)!important;
+}
+body.ui-v15 #modal[data-screen="roulette"] .daily-wheel{
+ background:#080c1b!important;
+ will-change:transform;
+}
+body.ui-v15 #modal[data-screen="roulette"] .roulette-disc-svg{
+ filter:drop-shadow(0 0 14px #6052c696)
+        drop-shadow(0 0 22px #178fdf46)
+        drop-shadow(0 7px 13px #040211c0);
+}
+body.ui-v15 #modal[data-screen="roulette"] .daily-wheel-stage:before{
+ width:min(100%,345px);
+ box-shadow:0 0 74px #4939ce80,0 0 118px #198de44d,0 0 165px #e447a530;
+}
+body.ui-v15 #modal[data-screen="roulette"] .roulette-ad-spin{
+ box-sizing:border-box;display:flex;align-items:center;justify-content:center;
+ width:100%;min-height:52px;margin:10px 0 0;padding:12px 16px;
+ border:2px solid #85ace1!important;border-bottom:5px solid #365b9a!important;
+ border-radius:6px!important;
+ background:linear-gradient(110deg,#205c99,#253a79)!important;
+ color:#edfaff;font-size:15px;font-weight:950;line-height:1.25;
+ box-shadow:0 7px 22px #04133b66;
+ cursor:pointer;
+ transition:filter .15s ease,transform .15s ease;
+}
+body.ui-v15 #modal[data-screen="roulette"] .roulette-ad-spin:not(:disabled):hover{
+ filter:brightness(1.12);transform:translateY(-1px);
+}
+body.ui-v15 #modal[data-screen="roulette"] .roulette-ad-spin:disabled{
+ opacity:.64;cursor:not-allowed;
+ background:#253044!important;color:#b3c3d8;
+ border-color:#53667f!important;border-bottom-color:#334050!important;
+ box-shadow:none;
+}
+body.ui-v15 #modal[data-screen="roulette"] .roulette-ad-spin[hidden]{
+ display:none!important;
+}
+@media(max-width:640px){
+ body.ui-v15 #modal[data-screen="roulette"] .roulette-ad-spin{
+  min-height:50px;font-size:13px;padding:10px 12px;
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ body.ui-v15 #modal[data-screen="roulette"] .daily-wheel.spinning{
+  transition-duration:.01ms!important;
+ }
+}
+
+
+/* v3.52 · colorful layered galaxy field beneath the daily reward calendar.
+   Uses the same procedural stellar associations and tiny crisp pixel stars as
+   the actual game's deep-space background, painted once per page open. */
+body.ui-v15 #modal[data-screen="daily"] .rewards-page-content{
+ position:relative!important;
+ isolation:isolate;
+ overflow-y:auto;
+ background:#090c1d;
+ border:1px solid #42396d;
+ border-radius:8px;
+ padding:15px 14px 12px;
+}
+body.ui-v15 #modal[data-screen="daily"] .rewards-page-content>.daily-galaxy-stars{
+ position:absolute;
+ top:0;left:0;
+ z-index:0;
+ display:block;
+ width:100%;
+ height:100%;
+ object-fit:cover;
+ opacity:.94;
+ pointer-events:none;
+}
+body.ui-v15 #modal[data-screen="daily"] .rewards-page-content> :not(.daily-galaxy-stars){
+ position:relative;
+ z-index:1;
+}
+body.ui-v15 #modal[data-screen="daily"] .daily-streak{
+ border:2px solid #8663b7!important;
+ background:linear-gradient(115deg,rgba(65,36,96,.72),rgba(16,12,42,.72))!important;
+ backdrop-filter:blur(3px);
+ box-shadow:0 5px 20px #0702144e;
+}
+body.ui-v15 #modal[data-screen="daily"] .daily-day{
+ background:linear-gradient(150deg,rgba(41,22,78,.52),rgba(12,12,34,.56))!important;
+ border-color:#7960b3!important;
+ border-bottom-color:#4d3786!important;
+ box-shadow:inset 0 1px 0 #ffffff16,0 5px 12px #09031670;
+ backdrop-filter:blur(1.2px);
+}
+body.ui-v15 #modal[data-screen="daily"] .daily-day-current{
+ border-color:#c2a4ff!important;
+ border-bottom-color:#6d4dd9!important;
+ background:linear-gradient(112deg,rgba(94,40,171,.69),rgba(20,19,70,.61))!important;
+ box-shadow:inset 0 0 24px #7748d643,0 0 26px #8e43d771;
+}
+body.ui-v15 #modal[data-screen="daily"] .daily-day-claimed{
+ border-color:#ad8dbb!important;
+ border-bottom-color:#68499b!important;
+ background:linear-gradient(130deg,rgba(62,42,98,.65),rgba(17,20,51,.59))!important;
+}
+body.ui-v15 #modal[data-screen="daily"] .daily-day-head small{
+ color:#e2d6fd;
+}
+body.ui-v15 #modal[data-screen="daily"] .daily-day>strong{
+ color:#e9dbff;
+}
+body.ui-v15 #modal[data-screen="daily"] .daily-day-reward i{
+ color:#ffe6ae;
+ text-shadow:0 0 9px #e9b95ca3;
+}
+body.ui-v15 #modal[data-screen="daily"] .daily-day-reward b{
+ color:#fff0d5;
+ text-shadow:0 2px 3px #07031e;
+}
+body.ui-v15 #modal[data-screen="daily"] .rewards-section-caption,
+body.ui-v15 #modal[data-screen="daily"] .daily-calendar-note,
+body.ui-v15 #modal[data-screen="daily"] .rewards-next-hint{
+ text-shadow:0 2px 5px #090418e6;
+}
+body.ui-v15 #modal[data-screen="daily"] .daily-claim{
+ box-shadow:0 8px 28px #48269d80,0 0 16px #c586ff3c!important;
+}
+body.ui-v15 #modal[data-screen="roulette"] .daily-wheel{
+ contain:paint;
+}
+body.ui-v15 #modal[data-screen="roulette"] .roulette-disc-svg{
+ display:block;
+ width:100%;
+ height:100%;
+ object-fit:contain;
+}
+@media(max-width:640px){
+ body.ui-v15 #modal[data-screen="daily"] .rewards-page-content{
+  padding:10px 9px;
+ }
+}
+
+
+/* v3.53 · FULLY scroll-free rewards. Buttons stay in the visible panel.
+   A single fitted content layer handles short viewports without scroll offsets. */
+body.ui-v15 #modal:is([data-screen="daily"],[data-screen="roulette"]) .modal-card,
+body.ui-v15 #modal:is([data-screen="daily"],[data-screen="roulette"]) .daily-screen{
+ overflow:hidden!important;
+}
+body.ui-v15 #modal[data-screen="daily"] .rewards-page-content,
+body.ui-v15 #modal[data-screen="roulette"] .rewards-page-content{
+ display:block!important;
+ position:relative!important;
+ flex:1 1 0;
+ min-height:0;
+ max-height:100%;
+ overflow:hidden!important;
+ overscroll-behavior:contain;
+ scrollbar-width:none!important;
+ -ms-overflow-style:none;
+}
+body.ui-v15 #modal:is([data-screen="daily"],[data-screen="roulette"]) .rewards-page-content::-webkit-scrollbar{
+ width:0!important;height:0!important;display:none!important;
+}
+body.ui-v15 #modal:is([data-screen="daily"],[data-screen="roulette"]) .rewards-fit-body{
+ position:relative;
+ box-sizing:border-box;
+ display:flex;
+ flex-direction:column;
+ width:100%;
+ min-width:0;
+ height:max-content;
+ min-height:0;
+ margin:0;
+ transform-origin:top center;
+ will-change:transform;
+ isolation:isolate;
+ overflow:visible;
+}
+body.ui-v15 #modal[data-screen="daily"] .rewards-fit-body>.daily-galaxy-stars{
+ position:absolute;
+ display:block;
+ top:0;left:0;
+ width:100%;height:100%;
+ z-index:0;
+ object-fit:cover;
+ opacity:.91;
+ pointer-events:none!important;
+ user-select:none;
+}
+body.ui-v15 #modal[data-screen="daily"] .rewards-fit-body> :not(.daily-galaxy-stars){
+ position:relative;
+ z-index:1;
+}
+body.ui-v15 #modal:is([data-screen="daily"],[data-screen="roulette"]) .rewards-fit-body button{
+ position:relative;
+ z-index:3;
+ pointer-events:auto;
+ touch-action:manipulation;
+}
+body.ui-v15 #modal:is([data-screen="daily"],[data-screen="roulette"]) .rewards-fit-body button:disabled{
+ pointer-events:auto;
+}
+/* Place all seven days where they fit, rather than an extra screen below. */
+@media(max-width:640px){
+ body.ui-v15 #modal[data-screen="daily"] .daily-streak{
+  min-height:56px!important;
+  margin-bottom:9px!important;
+  padding:9px 11px!important;
+  gap:6px 10px!important;
+ }
+ body.ui-v15 #modal[data-screen="daily"] .daily-streak>strong{
+  font-size:22px!important;
+ }
+ body.ui-v15 #modal[data-screen="daily"] .rewards-section-caption{
+  margin:3px 0 8px!important;
+ }
+ body.ui-v15 #modal[data-screen="daily"] .daily-calendar{
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:6px!important;
+  margin-bottom:9px!important;
+ }
+ body.ui-v15 #modal[data-screen="daily"] .daily-day{
+  min-height:76px!important;
+  padding:8px!important;
+  gap:3px!important;
+ }
+ body.ui-v15 #modal[data-screen="daily"] .daily-day-current{
+  grid-column:span 3!important;
+  min-height:89px!important;
+  padding:12px 15px!important;
+ }
+ body.ui-v15 #modal[data-screen="daily"] .daily-day>strong{
+  font-size:13px!important;
+ }
+ body.ui-v15 #modal[data-screen="daily"] .daily-day-head small{
+  font-size:10px!important;
+ }
+ body.ui-v15 #modal[data-screen="daily"] .daily-day-head span{
+  width:19px;height:19px;font-size:11px;
+ }
+ body.ui-v15 #modal[data-screen="daily"] .daily-day-reward i{
+  font-size:19px!important;
+ }
+ body.ui-v15 #modal[data-screen="daily"] .daily-day-reward b{
+  font-size:16px!important;
+ }
+ body.ui-v15 #modal[data-screen="daily"] .daily-day-current .daily-day-reward b{
+  font-size:25px!important;
+ }
+ body.ui-v15 #modal[data-screen="daily"] .daily-calendar-note{
+  margin-bottom:8px!important;
+  font-size:11px!important;
+  line-height:1.25!important;
+ }
+ body.ui-v15 #modal[data-screen="daily"] .daily-claim{
+  min-height:48px!important;
+  padding:9px!important;
+  font-size:14px!important;
+ }
+ body.ui-v15 #modal[data-screen="daily"] .rewards-next-hint{
+  margin-top:6px!important;
+  font-size:11px!important;
+ }
+ body.ui-v15 #modal[data-screen="roulette"] .daily-wheel-stage{
+  min-height:199px!important;
+  padding:4px!important;
+ }
+ body.ui-v15 #modal[data-screen="roulette"] .daily-wheel{
+  width:186px!important;
+  height:186px!important;
+ }
+ body.ui-v15 #modal[data-screen="roulette"] .roulette-prizes-title{
+  margin-bottom:6px!important;
+ }
+ body.ui-v15 #modal[data-screen="roulette"] .daily-wheel-legend-item{
+  min-height:42px!important;
+  padding:6px!important;
+ }
+ body.ui-v15 #modal[data-screen="roulette"] .daily-prize-note{
+  font-size:10px!important;
+  margin:5px 0!important;
+ }
+ body.ui-v15 #modal[data-screen="roulette"] .daily-result{
+  min-height:39px!important;
+  padding:7px!important;
+  margin-bottom:7px!important;
+ }
+ body.ui-v15 #modal[data-screen="roulette"] .daily-spin,
+ body.ui-v15 #modal[data-screen="roulette"] .roulette-ad-spin{
+  min-height:46px!important;
+  padding:8px!important;
+ }
+}
+@media(max-height:690px){
+ body.ui-v15 #modal:is([data-screen="daily"],[data-screen="roulette"]) .daily-screen{
+  padding-top:12px!important;
+  padding-bottom:12px!important;
+ }
+ body.ui-v15 #modal:is([data-screen="daily"],[data-screen="roulette"]) .rewards-header{
+  margin-bottom:8px!important;
+ }
+ body.ui-v15 #modal:is([data-screen="daily"],[data-screen="roulette"]) .rewards-header h2{
+  font-size:clamp(22px,3vw,30px)!important;
+  margin:3px 0!important;
+ }
+ body.ui-v15 #modal:is([data-screen="daily"],[data-screen="roulette"]) .rewards-tabs{
+  min-height:44px!important;
+  margin-bottom:8px!important;
+ }
+ body.ui-v15 #modal:is([data-screen="daily"],[data-screen="roulette"]) .rewards-tabs>button{
+  min-height:40px!important;
+ }
+ body.ui-v15 #modal[data-screen="daily"] .rewards-page-content{
+  padding:9px!important;
+ }
+}
+
+
+/* v3.54 — use native zoom rather than a transformed hit-test layer.
+   The wheel event is cancelled in game.js, including trackpad gestures. */
+body.ui-v15 #modal:is([data-screen="daily"],[data-screen="roulette"]) .rewards-fit-body{
+ transform:none!important;
+ transform-origin:initial!important;
+ will-change:auto!important;
+}
+body.ui-v15 #modal:is([data-screen="daily"],[data-screen="roulette"]) .rewards-page-content{
+ overflow:hidden!important;
+ overscroll-behavior:none!important;
+ touch-action:manipulation;
+}
+body.ui-v15 #modal:is([data-screen="daily"],[data-screen="roulette"]) :is(.daily-back,.rewards-tabs>button,.daily-claim,.daily-spin,.roulette-ad-spin){
+ touch-action:manipulation;
+ pointer-events:auto;
+}
+body.ui-v15 #modal[data-screen="roulette"] .daily-result[hidden]{
+ display:none!important;
+}
+
+
+/* A deliberate, unmistakable full wipe action. Never confused with "New Game"
+   (which deliberately preserves tracks, currency and achievements). */
+body.ui-v15 #tester-panel .tester-wipe-zone{
+ margin:13px 0 4px;padding:12px;
+ border:2px solid #9c4d62;border-radius:7px;
+ background:linear-gradient(135deg,#3d1b31,#221322);
+}
+body.ui-v15 #tester-panel .tester-absolute-reset{
+ display:block;width:100%;min-height:53px;
+ padding:12px 9px;border:2px solid #f19b9e!important;
+ border-bottom:5px solid #8e354e!important;border-radius:6px;
+ color:#fff3f4;font-size:14px;font-weight:950;letter-spacing:.025em;
+ background:linear-gradient(120deg,#a63852,#752137)!important;
+ box-shadow:0 5px 20px #4e111e80;
+ cursor:pointer;transition:filter .15s,transform .15s;
+}
+body.ui-v15 #tester-panel .tester-absolute-reset:hover{
+ filter:brightness(1.18);transform:translateY(-1px);
+}
+body.ui-v15 #tester-panel .tester-absolute-reset:focus-visible{
+ outline:3px solid #ffe4b1;outline-offset:3px;
+}
+body.ui-v15 #tester-panel #tester-full-reset-warning{
+ margin:9px 0 0;color:#efbcc4;font-size:11px;line-height:1.5;
+}
+
+
+/* v3.56: FIX THE HIT BOXES, NOT JUST THE SCROLLBAR.
+   The previous "rewards-fit-body" used zoom/transform on every interactive
+   descendant; that shifts Chrome pointer hit testing after wheel gestures.
+   All rewards now live in normal unscaled flex flow. */
+body.ui-v15 #modal[data-screen="daily"] .rewards-page-content,
+body.ui-v15 #modal[data-screen="roulette"] .rewards-page-content{
+ box-sizing:border-box;
+ display:flex!important;
+ flex-direction:column!important;
+ align-items:stretch;
+ justify-content:flex-start;
+ position:relative!important;
+ isolation:isolate;
+ flex:1 1 auto;
+ width:100%;
+ height:auto;
+ min-height:0!important;
+ min-width:0!important;
+ max-height:100%;
+ overflow:hidden!important;
+ overscroll-behavior:none!important;
+ scroll-behavior:auto!important;
+ touch-action:manipulation;
+}
+body.ui-v15 #modal[data-screen="daily"] .rewards-page-content{
+ padding:14px!important;
+}
+body.ui-v15 #modal[data-screen="roulette"] .rewards-page-content{
+ padding:2px 4px 0 0!important;
+}
+body.ui-v15 #modal[data-screen="daily"] .rewards-page-content > .daily-galaxy-stars{
+ position:absolute!important;
+ inset:0!important;
+ top:0!important;left:0!important;
+ width:100%!important;height:100%!important;
+ z-index:0!important;
+ object-fit:cover;
+ pointer-events:none!important;
+ user-select:none;
+}
+body.ui-v15 #modal[data-screen="daily"] .rewards-page-content > :not(.daily-galaxy-stars){
+ position:relative;
+ z-index:1;
+}
+body.ui-v15 #modal:is([data-screen="daily"],[data-screen="roulette"]) .rewards-page-content button{
+ position:relative;
+ z-index:2;
+ pointer-events:auto!important;
+ cursor:pointer;
+ touch-action:manipulation;
+}
+body.ui-v15 #modal:is([data-screen="daily"],[data-screen="roulette"]) .rewards-page-content button:disabled{
+ cursor:not-allowed;
+}
+/* Keep the starfield visible behind cards, but never above a button. */
+body.ui-v15 #modal[data-screen="daily"] .daily-calendar{
+ flex:none;
+}
+body.ui-v15 #modal[data-screen="daily"] .daily-streak{
+ flex:none;
+}
+body.ui-v15 #modal[data-screen="daily"] .daily-claim{
+ flex:none;
+ margin-top:auto!important;
+}
+body.ui-v15 #modal[data-screen="roulette"] .roulette-intro,
+body.ui-v15 #modal[data-screen="roulette"] .daily-roulette-body,
+body.ui-v15 #modal[data-screen="roulette"] .daily-prize-note,
+body.ui-v15 #modal[data-screen="roulette"] .daily-result,
+body.ui-v15 #modal[data-screen="roulette"] .daily-spin,
+body.ui-v15 #modal[data-screen="roulette"] .roulette-ad-spin{
+ flex:none;
+}
+body.ui-v15 #modal[data-screen="roulette"] .daily-spin{
+ margin-top:auto!important;
+}
+/* The popup contains no element with scrollable content; trackpad/wheel
+   cannot displace buttons or turn them into unreachable hit areas. */
+body.ui-v15 #modal[data-screen="daily"] .modal-card,
+body.ui-v15 #modal[data-screen="roulette"] .modal-card,
+body.ui-v15 #modal[data-screen="daily"] .daily-screen,
+body.ui-v15 #modal[data-screen="roulette"] .daily-screen{
+ overflow:hidden!important;
+ overscroll-behavior:none!important;
+}
+@media(max-width:640px){
+ body.ui-v15 #modal[data-screen="daily"] .rewards-page-content{
+  padding:9px 8px!important;
+ }
+ body.ui-v15 #modal[data-screen="roulette"] .rewards-page-content{
+  padding:0!important;
+ }
+}
+@media(max-height:700px) and (min-width:641px){
+ body.ui-v15 #modal[data-screen="daily"] .daily-day{
+  min-height:102px!important;padding:10px!important;
+ }
+ body.ui-v15 #modal[data-screen="daily"] .daily-streak{
+  min-height:55px!important;margin-bottom:7px!important;
+ }
+ body.ui-v15 #modal[data-screen="daily"] .daily-calendar{
+  gap:7px!important;margin-bottom:7px!important;
+ }
+ body.ui-v15 #modal[data-screen="daily"] .daily-claim{
+  min-height:45px!important;
+ }
+ body.ui-v15 #modal[data-screen="roulette"] .daily-wheel-stage{
+  min-height:222px!important;
+ }
+ body.ui-v15 #modal[data-screen="roulette"] .daily-wheel{
+  width:208px!important;height:208px!important;
+ }
+ body.ui-v15 #modal[data-screen="roulette"] .daily-wheel-legend-item{
+  min-height:41px!important;padding:6px!important;
+ }
+ body.ui-v15 #modal[data-screen="roulette"] .roulette-intro{
+  min-height:38px!important;margin-bottom:6px!important;
+ }
+ body.ui-v15 #modal[data-screen="roulette"] .daily-result{
+  min-height:36px!important;
+ }
+}
+@media(max-height:690px) and (max-width:640px){
+ body.ui-v15 #modal[data-screen="daily"] .daily-streak{
+  min-height:49px!important;padding:6px!important;
+ }
+ body.ui-v15 #modal[data-screen="daily"] .daily-day{
+  min-height:64px!important;padding:6px!important;
+ }
+ body.ui-v15 #modal[data-screen="daily"] .daily-day-current{
+  min-height:76px!important;
+ }
+ body.ui-v15 #modal[data-screen="daily"] .daily-claim{
+  min-height:42px!important;
+ }
+ body.ui-v15 #modal[data-screen="roulette"] .daily-wheel-stage{
+  min-height:150px!important;padding:1px!important;
+ }
+ body.ui-v15 #modal[data-screen="roulette"] .daily-wheel{
+  width:144px!important;height:144px!important;
+ }
+ body.ui-v15 #modal[data-screen="roulette"] .daily-wheel-legend-item{
+  min-height:33px!important;padding:4px!important;
+ }
+ body.ui-v15 #modal[data-screen="roulette"] .daily-prize-note{
+  display:none!important;
+ }
+ body.ui-v15 #modal[data-screen="roulette"] .roulette-intro{
+  min-height:32px!important;padding:6px!important;
+ }
+}
+
+
+/* v3.57 — closing a modal MUST win over any reward-page display rule.
+   Prior CSS selected #modal[data-screen=daily] with greater specificity
+   than .modal-backdrop.off and left an invisible input-blocking overlay. */
+body.ui-v15 #modal.off,
+body.ui-v15 #modal.off:is([data-screen="daily"],[data-screen="roulette"]){
+ display:none!important;
+ visibility:hidden!important;
+ pointer-events:none!important;
+}

@@ -1,0 +1,117 @@
+/* Infinity Space — compact mobile arcade layout and semantic button colors. */
+:root{--arena-blue:#2860ff;--arena-red:#ff1744;--arena-yellow:#ffe500;
+ --arena-green:#27ff40;--arena-purple:#9922ff}
+.brand,.stat,.left,#radar{
+ background:linear-gradient(150deg,#131b34ed,#0b1125eb);
+ border-color:#3b4c73;border-bottom-color:#263458;
+}
+.brand b em{color:var(--arena-yellow)}
+.stat .accent{color:var(--arena-yellow)}
+.left h3{color:#e5eaff}
+.rank.mine{color:var(--arena-yellow)}
+#pause{
+ --arena-accent:var(--arena-blue);
+ background:linear-gradient(145deg,#193b87,#121e49);
+ border-color:var(--arena-blue);border-bottom-color:#1b3067;
+ color:#fff;
+}
+#touch-stick{border-color:#2860ff91;background:radial-gradient(circle,#2860ff29,#111c3d50)}
+#thumb{border-color:#a4bfff;background:linear-gradient(145deg,#406fff,#182b7d);box-shadow:0 0 15px #2860ff58}
+#result .panel,#paused .arena-pause-panel,#guide .arena-guide-panel,
+#menu .panel{background:linear-gradient(145deg,#1b233d,#0d1125 84%);border-color:#415173;border-bottom-color:#273452}
+.mode-back,.text-btn{--arena-accent:var(--arena-blue);background:linear-gradient(150deg,#1a2b51,#111b34);border-color:#4660a2;border-bottom-color:#1a306b;color:#f0f4ff}
+.mode-back:hover,.text-btn:hover{background:linear-gradient(150deg,#24428b,#182654);border-color:var(--arena-blue);box-shadow:0 0 14px #2860ff47}
+.ability{border-color:color-mix(in srgb,var(--arena-accent) 50%,#253353);background:linear-gradient(150deg,#19243d,#10182e)}
+.ability:hover{border-color:var(--arena-accent);box-shadow:0 0 13px color-mix(in srgb,var(--arena-accent) 35%,transparent)}
+#paused #change2,#result #change{--arena-accent:var(--arena-blue)}
+#guide .arena-guide-dots span.active{background:var(--arena-blue)}
+#guide .arena-guide-demo{background:radial-gradient(circle at 50% 45%,#163b8260,#0e172f 72%);border-color:#40577b}
+.toast{border-color:var(--arena-yellow);border-bottom-color:#76610f;background:#171f34;color:#fff}
+@media(max-width:760px),(pointer:coarse) and (max-width:1024px){
+ .top{
+  left:calc(env(safe-area-inset-left) + 8px);
+  right:calc(env(safe-area-inset-right) + 8px);
+  top:calc(env(safe-area-inset-top) + 8px);
+  display:grid;grid-template-columns:minmax(0,34%) minmax(0,1fr);
+  align-items:start;gap:5px;
+ }
+ .brand{min-width:0;max-width:100%;padding:6px 7px}
+ .brand b{font-size:clamp(9px,2.7vw,12px);letter-spacing:.03em;white-space:nowrap}
+ .brand small{font-size:clamp(6px,1.8vw,8px);letter-spacing:.02em}
+ .stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;flex-wrap:nowrap}
+ .stat{min-width:0;min-height:48px;padding:6px 3px;border-bottom-width:2px;text-align:center}
+ .stat label{font-size:clamp(6.5px,1.9vw,8px);letter-spacing:0;overflow-wrap:anywhere}
+ .stat b{font-size:clamp(13px,4vw,18px);white-space:nowrap}
+ .stats .stat:nth-child(2){display:block}
+ .stat[hidden]{display:none!important}
+ #team-box:not([hidden]){grid-column:span 3;min-height:32px;display:flex;justify-content:space-between;padding:4px 8px;align-items:center}
+ #team-box b{font-size:13px}
+ .left,#radar{display:none}
+ #pause{
+  left:auto;right:calc(env(safe-area-inset-right) + 9px);
+  top:calc(env(safe-area-inset-top) + 82px);bottom:auto;
+  transform:none;min-height:39px;padding:7px 11px;font-size:10px;
+ }
+ .actions{
+  right:calc(env(safe-area-inset-right) + 12px);
+  bottom:calc(env(safe-area-inset-bottom) + 21px);gap:6px;
+ }
+ .ability{width:clamp(49px,14vw,59px);height:clamp(49px,14vw,59px);border-bottom-width:3px;border-radius:8px}
+ .ability span{font-size:22px}
+ .ability small{font-size:8px;letter-spacing:0}
+ #touch-stick{
+  display:block;left:calc(env(safe-area-inset-left) + 13px);
+  bottom:calc(env(safe-area-inset-bottom) + 12px);
+  width:clamp(94px,27vw,122px);height:clamp(94px,27vw,122px)
+ }
+ #thumb{width:41px;height:41px;left:calc(50% - 20.5px);top:calc(50% - 20.5px)}
+ .hint{display:none}
+ .shade{padding:calc(env(safe-area-inset-top) + 9px) calc(env(safe-area-inset-right) + 9px) calc(env(safe-area-inset-bottom) + 9px) calc(env(safe-area-inset-left) + 9px)}
+ .panel,#paused .arena-pause-panel,#result .panel,#guide .arena-guide-panel{
+  width:100%;max-width:100%;max-height:calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 18px);
+  overflow-y:auto;overscroll-behavior:contain;padding:clamp(14px,4vw,21px);
+ }
+ .hero,#paused .arena-pause-panel .hero,#result .panel .hero{font-size:clamp(27px,8vw,40px);line-height:1.05;letter-spacing:-.04em}
+ .desc{font-size:12px;line-height:1.45}
+ .arena-dialog-actions{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+ #paused #resume{grid-column:1/-1;min-height:47px;font-size:12px}
+ #paused #guide-open,#paused #change2{min-height:44px}
+ #result .arena-dialog-actions>button{grid-column:auto;min-height:44px}
+ #result-stat{gap:5px;margin:12px 0}
+ .result-cell{min-width:0;padding:8px 3px}
+ .result-cell b{font-size:clamp(19px,5.4vw,28px)}
+ .result-cell small{font-size:clamp(7px,2vw,9px);overflow-wrap:anywhere}
+ #guide .arena-guide-demo{height:clamp(68px,16dvh,105px);margin-bottom:8px}
+ #guide .arena-guide-dots{margin:8px 0}
+ #guide #guide-step-description{min-height:0;font-size:12px}
+ .mode-grid{grid-template-columns:1fr}
+ .mode-grid .mode{min-height:79px;padding:9px 52px 9px 12px}
+ .mode-grid .mode strong{font-size:15px;margin:6px 0 3px}
+ .mode-grid .mode small{font-size:10px;line-height:1.3}
+ .mode-grid .mode .symbol{width:32px;height:32px;font-size:20px}
+ .mode-menu-top{min-width:0}
+ .mode-menu-top>*{min-width:0}
+}
+@media(max-width:380px){
+ .brand{padding:5px}
+ .brand b{font-size:9px}
+ .top{grid-template-columns:minmax(0,32%) minmax(0,1fr)}
+ .ability{width:47px;height:50px}
+ .actions{gap:4px}
+ #touch-stick{width:96px;height:96px;left:calc(env(safe-area-inset-left) + 9px)}
+}
+@media(max-height:510px) and (orientation:landscape){
+ .top{grid-template-columns:105px minmax(0,1fr);width:min(70vw,475px)}
+ #pause{top:calc(env(safe-area-inset-top) + 7px);right:calc(env(safe-area-inset-right) + 9px)}
+ #touch-stick{width:86px;height:86px;bottom:calc(env(safe-area-inset-bottom) + 8px)}
+ .actions{bottom:calc(env(safe-area-inset-bottom) + 8px)}
+ .ability{width:50px;height:50px}
+ .panel,#paused .arena-pause-panel,#result .panel,#guide .arena-guide-panel{padding:11px 14px}
+ .hero,#paused .arena-pause-panel .hero,#result .panel .hero{font-size:25px;margin:4px 0 7px}
+ .desc{font-size:11px;margin:4px 0 9px}
+ #guide .arena-guide-demo{height:56px}
+ #result-stat{margin:8px 0}
+ .mode-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .mode-grid .mode{min-height:67px}
+ .mode-grid .mode strong{font-size:13px}
+}

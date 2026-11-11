@@ -1,0 +1,313 @@
+/* Infinity Space — spectral accents v6.
+   Deliberate hierarchy: quiet graphite/navy surfaces, violet for primary actions,
+   electric blue for navigation, gold for rewards, green for success, red for reset.
+   All accents stay saturated; only the INTERACTIVE element gets its hue. */
+:root{
+ --space-red:#ff1744;--space-green:#27ff40;--space-yellow:#ffe500;
+ --space-purple:#9922ff;--space-blue:#2860ff;
+ --space-ink:#090c1b;--space-panel:#11162b;--space-line:#414866;
+ --space-quiet:#c0c7e0;--space-white:#f7f8ff;
+ --cyan:#2860ff;--blue:#2860ff;--gold:#ffe500;--purple:#9922ff;
+ --ui-purple:#7425d8;--ui-purple-bright:#9922ff;
+}
+/* Fallback interaction accent is neutral, not purple. */
+body.ui-v15 #modal,
+body.ui-v15 #hud{--interaction-accent:#4867db}
+body.ui-v15 #modal .br-foot-primary,
+body.ui-v15 #modal .br-inline-cta,
+body.ui-v15 #modal .music-control-play,
+body.ui-v15 #hud .primary,
+body.ui-v15 #hud .v15-hud .ability-btn{
+ --interaction-accent:var(--space-purple);
+}
+body.ui-v15 #modal .br-foot-secondary,
+body.ui-v15 #modal .br-small-action,
+body.ui-v15 #modal .br-head-back,
+body.ui-v15 #modal .game-select-trigger,
+body.ui-v15 #modal .game-select-item,
+body.ui-v15 #hud .camera-buttons button,
+body.ui-v15 #hud .v15-camera-toggle{
+ --interaction-accent:var(--space-blue);
+}
+body.ui-v15 #modal [data-reward-page],
+body.ui-v15 #modal [data-reward-action],
+body.ui-v15 #modal .daily-claim,
+body.ui-v15 #modal .reward-claim,
+body.ui-v15 #modal button[data-daily-action],
+body.ui-v15 #modal button[data-roulette-action]{
+ --interaction-accent:var(--space-yellow);
+}
+body.ui-v15 #modal button[data-music-action],
+body.ui-v15 #modal .music-track-preview,
+body.ui-v15 #modal .music-control{--interaction-accent:var(--space-purple)}
+body.ui-v15 #modal button[data-action="reset"],
+body.ui-v15 #modal button[data-action="delete"],
+body.ui-v15 #hud button[data-action="reset"]{
+ --interaction-accent:var(--space-red);
+}
+body.ui-v15 #modal .br-tab.active,
+body.ui-v15 #modal .br-switch.active,
+body.ui-v15 #modal .br-filter.active,
+body.ui-v15 #modal .music-track-preview[aria-pressed="true"]{
+ --interaction-accent:var(--space-purple);
+}
+body.ui-v15 #modal .br-small-action.warn{
+ --interaction-accent:var(--space-red);
+}
+body.ui-v15 #modal .br-filter:not(.active),
+body.ui-v15 #modal .br-tab:not(.active){
+ --interaction-accent:var(--space-blue);
+}
+/* Clean up static leftover halos so an unrelated tint never leaks into a
+   navigation button or a camera control. */
+body.ui-v15 #hud .camera-buttons button:hover,
+body.ui-v15 #hud .v15-camera-toggle:hover{
+ border-color:var(--space-blue)!important;
+ background:linear-gradient(160deg,#222657,#14172e)!important;
+}
+body.ui-v15 #hud .camera-buttons button:hover .zoom-glyph,
+body.ui-v15 #modal #screen-map .map-corner.right button:hover .zoom-glyph{
+ background:linear-gradient(150deg,#2a4bd4,#20245c)!important;
+ border-color:var(--space-blue)!important;
+ box-shadow:0 0 12px #2860ff55,inset 0 1px #ffffff2a!important;
+}
+/* MENU — colors are reserved for decisions, not assigned to random rows. */
+body.ui-v15 #screen-menu{--interaction-accent:var(--space-blue);--mode-accent:var(--space-purple)}
+body.ui-v15 #screen-menu[data-preview-mode="endless"]{--mode-accent:var(--space-blue)}
+body.ui-v15 #screen-menu[data-preview-mode="arena"]{--mode-accent:var(--space-red)}
+body.ui-v15 #screen-menu[data-preview-mode="royale"]{--mode-accent:var(--space-purple)}
+body.ui-v15 #screen-menu[data-preview-mode="core"]{--mode-accent:var(--space-green)}
+body.ui-v15 #screen-menu[data-preview-mode="race"]{--mode-accent:var(--space-yellow)}
+body.ui-v15 #screen-menu[data-preview-mode="worms"]{--mode-accent:var(--space-purple)}
+body.ui-v15 #screen-menu .hub-mode-story::before{
+ background:
+  radial-gradient(ellipse at 80% 45%,#2d2e8818,transparent 54%),
+  linear-gradient(90deg,#080b1dfb 0%,#080c1df5 24%,#0a0d20ca 44%,
+   #0c0d1c62 67%,transparent 94%),
+  linear-gradient(0deg,#070918a0,transparent 28%,transparent 75%,#070918a0)!important;
+}
+body.ui-v15 #screen-menu .hub-mode-story-title{
+ color:var(--space-white)!important;
+ text-shadow:0 8px 29px #000c!important;
+}
+body.ui-v15 #screen-menu .hub-mode-story-kicker{
+ color:var(--mode-accent)!important;
+ text-shadow:0 0 11px color-mix(in srgb,var(--mode-accent) 33%,transparent)!important;
+}
+body.ui-v15 #screen-menu .hub-mode-story-counter{
+ color:var(--space-quiet)!important;
+}
+body.ui-v15 #screen-menu .hub-mode-story-goal{
+ color:#eeeefb!important;
+}
+body.ui-v15 #screen-menu .hub-mode-story-description{
+ color:var(--space-quiet)!important;
+}
+body.ui-v15 #screen-menu .hub-mode-story-tags>span,
+body.ui-v15 #screen-menu .hub-mode-story-tags>span:nth-child(n){
+ border:1px solid #414a72!important;border-bottom:3px solid #2b304f!important;
+ background:#10162bdb!important;color:#cbd1e7!important;
+}
+body.ui-v15 #screen-menu .hub-mode-story-tags>span:first-child{
+ border-color:var(--mode-accent)!important;
+ color:var(--space-white)!important;
+}
+body.ui-v15 #screen-menu .hub-mode-story-play{
+ --interaction-accent:var(--mode-accent);
+ background:linear-gradient(140deg,
+  color-mix(in srgb,var(--mode-accent) 47%,#0c102b),
+  color-mix(in srgb,var(--mode-accent) 59%,#16102c))!important;
+ border:2px solid var(--mode-accent)!important;
+ border-bottom:5px solid color-mix(in srgb,var(--mode-accent) 45%,#060b1b)!important;
+ box-shadow:0 6px 20px color-mix(in srgb,var(--mode-accent) 20%,transparent),
+ inset 0 1px #ffffff24!important;
+ color:#fff!important;
+ transition:filter .16s,box-shadow .16s,border-color .16s,transform .16s!important;
+}
+@media(hover:hover) and (pointer:fine){
+ body.ui-v15 #screen-menu .hub-mode-story-play:hover{
+  border-color:var(--mode-accent)!important;
+  box-shadow:0 0 0 1px color-mix(in srgb,var(--mode-accent) 55%,transparent),
+   0 0 19px color-mix(in srgb,var(--mode-accent) 43%,transparent),
+   0 6px 19px #0006!important;
+  filter:brightness(1.08)!important;
+ }
+}
+body.ui-v15 #screen-menu .hub-mode-story-play:focus-visible{
+ outline:2px solid var(--mode-accent)!important;outline-offset:3px!important;
+}
+/* Modes Back and step arrows are blue navigation actions throughout. */
+body.ui-v15 #screen-menu .hub-mode-story-back,
+body.ui-v15 #screen-menu .hub-mode-step{
+ --interaction-accent:var(--space-blue);
+ background:linear-gradient(150deg,#202c57,#11172f)!important;
+ border-color:#4c619d!important;
+ border-bottom-color:#263365!important;
+ box-shadow:0 4px 15px #0005!important;color:#f1f3ff!important;
+}
+body.ui-v15 #screen-menu .hub-mode-story-back:hover,
+body.ui-v15 #screen-menu .hub-mode-step:not(:disabled):hover{
+ border-color:var(--space-blue)!important;
+ box-shadow:0 0 14px #2860ff55!important;
+ filter:brightness(1.1)!important;
+}
+body.ui-v15 #screen-menu .hub-mode-dots button{
+ background:#343a57!important;border-color:#48506c!important;
+ box-shadow:none!important;
+}
+body.ui-v15 #screen-menu .hub-mode-dots button.current{
+ background:var(--mode-accent)!important;
+ border-color:var(--mode-accent)!important;
+ box-shadow:0 0 9px color-mix(in srgb,var(--mode-accent) 32%,transparent)!important;
+}
+body.ui-v15 #screen-menu .hub-mode-story-brand,
+body.ui-v15 #screen-menu .hub-mode-gesture{color:#b6bdd9!important}
+body.ui-v15 #screen-menu .hub-mode-story-brand span{color:#626d91!important}
+/* Small navigation cards all share ONE surface; their icon and hover use a
+   semantic accent, rather than each whole card becoming a bright tile. */
+body.ui-v15 #screen-menu.hub-main-carousel .hub-story-shortcut{
+ --interaction-accent:var(--space-blue);
+ color:#e7ebfa!important;
+ background:linear-gradient(175deg,#1a2037f2,#101528f2)!important;
+ border:1px solid #465073!important;border-bottom:4px solid #293250!important;
+ box-shadow:inset 0 1px #ffffff0d,0 3px 10px #0004!important;
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-story-shortcut[data-shortcut="evolution"],
+body.ui-v15 #screen-menu.hub-main-carousel .hub-story-shortcut[data-shortcut="music"],
+body.ui-v15 #screen-menu.hub-main-carousel .hub-story-shortcut[data-shortcut="settings"]{
+ --interaction-accent:var(--space-purple);
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-story-shortcut[data-shortcut="achievements"]{
+ --interaction-accent:var(--space-yellow);
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-story-shortcut[data-shortcut="new"]{
+ --interaction-accent:var(--space-red);
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-story-shortcut-icon{
+ color:var(--interaction-accent)!important;
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-story-shortcut[data-shortcut="new"]{
+ border-color:#765262!important;background:linear-gradient(160deg,#281825,#151324)!important;
+}
+@media(hover:hover) and (pointer:fine){
+ body.ui-v15 #screen-menu.hub-main-carousel .hub-story-shortcut[data-shortcut="new"]:hover{
+  border-color:var(--space-red)!important;
+  background:linear-gradient(160deg,#442132,#191629)!important;
+  box-shadow:0 0 13px #ff174455,0 4px 12px #0005!important;
+ }
+}
+@media(hover:hover) and (pointer:fine){
+ body.ui-v15 #screen-menu.hub-main-carousel .hub-story-shortcut:hover{
+  border-color:var(--interaction-accent)!important;
+  background:linear-gradient(175deg,
+   color-mix(in srgb,var(--interaction-accent) 15%,#1b2034),
+   #12182b)!important;
+  box-shadow:0 0 13px color-mix(in srgb,var(--interaction-accent) 32%,transparent),
+   0 4px 12px #0005!important;
+  filter:brightness(1.07)!important;
+ }
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-story-shortcut:focus-visible{
+ outline:2px solid var(--interaction-accent)!important;outline-offset:3px!important;
+ box-shadow:0 0 0 3px color-mix(in srgb,var(--interaction-accent) 23%,transparent)!important;
+}
+/* Menu quick rewards: gold is the sole accent for prizes. */
+body.ui-v15 #screen-menu.hub-main-carousel .hub-story-quick>.hub-story-reward{
+ --interaction-accent:var(--space-yellow);
+ background:linear-gradient(160deg,#292518f0,#19192bf0)!important;
+ border-color:#826d2d!important;border-bottom-color:#55491d!important;
+ color:#ffeb75!important;
+ box-shadow:none!important;
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-story-quick>.hub-story-reward>span:first-child{
+ color:var(--space-yellow)!important;
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-story-quick>.hub-story-reward.reward-available::after{
+ background:var(--space-green)!important;
+ box-shadow:0 0 7px #27ff4066!important;
+}
+@media(hover:hover) and (pointer:fine){
+ body.ui-v15 #screen-menu.hub-main-carousel .hub-story-quick>.hub-story-reward:hover{
+  border-color:var(--space-yellow)!important;
+  background:linear-gradient(160deg,#40351c,#231e25)!important;
+  box-shadow:0 0 13px #ffe50055!important;
+  filter:brightness(1.06)!important;
+ }
+}
+/* Options drawer: one coherent system. */
+body.ui-v15 #screen-menu .hub-menu::before{
+ color:#e5e9fc!important;
+}
+body.ui-v15 #screen-menu .hub-menu .eyeline{
+ color:var(--space-yellow)!important;
+}
+body.ui-v15 #screen-menu .hub-actions .hub-continue{
+ --interaction-accent:var(--space-purple);
+ background:linear-gradient(145deg,#56219c,#7b27d7)!important;
+ border-color:var(--space-purple)!important;border-bottom-color:#3f1b68!important;
+ box-shadow:0 5px 18px #9922ff29!important;color:#fff!important;
+}
+body.ui-v15 #screen-menu .hub-actions .hub-modes{
+ --interaction-accent:var(--space-blue);
+ background:linear-gradient(145deg,#1b2f76,#2043a0)!important;
+ border-color:var(--space-blue)!important;border-bottom-color:#13285c!important;
+ box-shadow:0 4px 15px #2860ff20!important;color:#fff!important;
+}
+body.ui-v15 #screen-menu .hub-actions .hub-modes>span:first-child{
+ border-color:#5372c9!important;background:#203d85!important;color:#fff!important;
+}
+body.ui-v15 #screen-menu .hub-actions .hub-new-world{
+ --interaction-accent:var(--space-red);
+ background:linear-gradient(145deg,#502034,#7e2440)!important;
+ border-color:#b63855!important;border-bottom-color:#50182b!important;
+ box-shadow:0 4px 12px #ff174418!important;color:#fff!important;
+}
+@media(hover:hover) and (pointer:fine){
+ body.ui-v15 #screen-menu .hub-actions .hub-continue:hover,
+ body.ui-v15 #screen-menu .hub-actions .hub-modes:hover,
+ body.ui-v15 #screen-menu .hub-actions .hub-new-world:hover{
+  border-color:var(--interaction-accent)!important;
+  box-shadow:0 0 17px color-mix(in srgb,var(--interaction-accent) 40%,transparent),
+   0 5px 14px #0006!important;
+  filter:brightness(1.08)!important;
+ }
+}
+/* Gameplay HUD: use violet progress and blue information; yellow for star dust.
+   Avoid rainbow-striped progress bars and rainbow borders on every card. */
+body.ui-v15 #screen-play .hud-bottom .mass-block{
+ border-color:#465882!important;border-bottom-color:#303d6b!important;
+ background:linear-gradient(155deg,#1b213cff,#111427f8)!important;
+}
+body.ui-v15 #screen-play .hud-bottom .mass-block::before{
+ background:linear-gradient(90deg,var(--space-blue),var(--space-purple))!important;
+ box-shadow:0 0 12px #2860ff32!important;
+}
+body.ui-v15 #screen-play .mass-heading{
+ color:#d6ddfa!important;
+}
+body.ui-v15 #screen-statistics .br-stat-grid>div{
+ border-color:#474a70!important;
+}
+body.ui-v15 #screen-music .music-track-card{
+ border-color:#4a466f!important;
+}
+body.ui-v15 #screen-music .music-track-card:has(.playing),
+body.ui-v15 #screen-music .music-track-card:has(.active){
+ border-color:var(--space-purple)!important;
+}
+body.ui-v15 #screen-music .music-control-play{
+ --interaction-accent:var(--space-purple);
+ background:linear-gradient(145deg,#44207a,#7133bb)!important;
+ border-color:var(--space-purple)!important;
+}
+/* Keep the game's existing achievement rarity colors unchanged. */
+body.ui-v15 #screen-bestiary .br-best-row{
+ border-color:#474a70!important;
+}
+body.ui-v15 #screen-settings .br-slider input[type=range]{
+ accent-color:var(--space-blue);
+}
+@media(prefers-reduced-motion:reduce){
+ body.ui-v15 #screen-menu .hub-mode-story-play,
+ body.ui-v15 #screen-menu .hub-story-shortcut{transition:none!important}
+}

@@ -1,0 +1,11 @@
+/* Infinity Space mode selector: preserves the original menu scene and existing screens. */
+#modal[data-screen="menu"] .menu-content{max-height:calc(100dvh - 82px);overflow-x:hidden;overflow-y:auto;scrollbar-width:thin;scrollbar-color:#8055c86a transparent;padding:10px 12px 8px 3px;margin-bottom:0}
+#modal[data-screen="menu"] .menu-nav>.arcade-nav{border:1px solid #845bde73!important;border-radius:9px!important;background:linear-gradient(105deg,#31205dbd,#17142a90)!important;color:#eadfff!important;margin:2px 0!important;font-weight:800;letter-spacing:.045em}
+#modal[data-screen="menu"] .menu-nav>.arcade-nav>span{color:#c7a5ff!important}
+#modal[data-screen="menu"] .menu-nav>.arcade-nav:hover{border-color:#d1afff!important;background:linear-gradient(110deg,#4d2a93,#26203e)!important;transform:translateX(2px)}
+#modal[data-screen="menu"] .menu-nav>.arcade-modes-nav{background:linear-gradient(100deg,#1e193dba,#131125ab)!important;border-color:#7b66b756!important}
+#modal[data-screen="menu"] .menu-nav>.arcade-nav small{color:#c1a9ff!important}
+#modal[data-screen="menu"] .menu-nav>button:not(.primary-button){min-height:34px;padding:9px 13px}
+#modal[data-screen="menu"] .menu-nav>.primary-button{font-size:clamp(10px,1.15vw,13px);line-height:1.2}
+@media(max-width:800px){#modal[data-screen="menu"] .menu-content{max-height:calc(100dvh - 46px);max-width:min(92%,420px);padding:4px 9px;margin:9px auto 22px 5%}#modal[data-screen="menu"] .menu-nav>button:not(.primary-button){padding:8px 11px}#modal[data-screen="menu"] .menu-card{align-items:flex-start}}
+@media(max-height:590px){#modal[data-screen="menu"] .menu-content{max-height:calc(100dvh - 32px)}#modal[data-screen="menu"] .menu-card h1{font-size:clamp(35px,5vw,60px);margin:8px 0}#modal[data-screen="menu"] .modal-lead{margin:0 0 10px}#modal[data-screen="menu"] .menu-nav>button:not(.primary-button){padding:6px 11px}}

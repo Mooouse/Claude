@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#080512">
+<meta name="description" content="Infinity Space — Cosmic Worms. Grow a glowing space serpent and survive a galaxy of rivals.">
+<title>Infinity Space — Cosmic Worms</title>
+<link rel="stylesheet" href="cosmic-worms.css?v=12">
+</head>
+<body>
+<canvas id="worm-field" aria-label="Cosmic Worms playing field"></canvas>
+<section id="worm-hud" class="worm-hud" aria-label="Match status">
+ <header class="worm-top">
+  <div class="worm-brand"><b>INFINITY <em>SPACE</em></b><small id="worm-mode-label">COSMIC WORMS / SURVIVAL</small></div>
+  <div class="worm-metrics">
+   <div class="worm-metric"><small data-word="length">LENGTH</small><strong id="worm-length">0</strong></div>
+   <div class="worm-metric"><small data-word="rank">RANK</small><strong id="worm-place">–</strong></div>
+   <div class="worm-metric"><small data-word="time">TIME</small><strong id="worm-time">00:00</strong></div>
+  </div>
+ </header>
+ <aside class="worm-leaders"><h3 data-word="leaders">LEADERBOARD</h3><div id="worm-ranking"></div></aside>
+ <aside class="worm-radar"><canvas id="worm-mini" width="150" height="110"></canvas><small data-word="radar">GALAXY RADAR</small></aside>
+ <button id="worm-pause" class="worm-pause-button" type="button" data-word="pause">PAUSE</button>
+ <div class="worm-hint" id="worm-hint">MOUSE / WASD — TURN · SPACE / CLICK — BOOST</div>
+ <button id="worm-boost" class="worm-boost-button" type="button" aria-label="Boost"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="square" aria-hidden="true"><path d="M4 12h15m-7-7 7 7-7 7"/></svg><b data-word="boost">BOOST</b></button>
+ <div id="worm-stick" class="worm-stick" role="group" aria-label="Flight joystick"><div id="worm-thumb" class="worm-thumb"></div></div>
+</section>
+<div id="worm-toast" class="worm-toast" role="status" aria-live="polite"></div>
+<div id="worm-pause-overlay" class="worm-shade" hidden role="dialog" aria-modal="true">
+ <div class="worm-panel">
+  <span class="worm-eyebrow">INFINITY SPACE / COSMIC WORMS</span>
+  <h1 data-word="paused">PAUSED</h1>
+  <p data-word="pauseDesc">Resume your flight, review the controls or return to the main menu.</p>
+  <div class="worm-actions"><button class="worm-primary" id="worm-resume" data-word="resume">CONTINUE</button><button id="worm-settings-open" data-word="settings">SETTINGS</button><button id="worm-open-guide" data-word="help">HOW TO PLAY</button><button id="worm-exit" data-word="menu">EXIT TO MENU</button></div>
+ </div>
+</div>
+<div id="worm-settings" class="worm-shade" hidden role="dialog" aria-modal="true" aria-labelledby="worm-settings-heading">
+ <div class="worm-panel worm-settings-panel">
+  <span class="worm-eyebrow">INFINITY SPACE / COSMIC WORMS</span>
+  <h1 id="worm-settings-heading" data-word="settings">SETTINGS</h1>
+  <h2 data-word="skins">COSMIC SKINS</h2>
+  <p data-word="skinDesc">Choose your worm's cosmic appearance. All skins are unlocked.</p>
+  <div id="worm-skin-grid" class="worm-skin-grid" role="group" aria-label="Cosmic worm skins"></div>
+  <h2 data-word="visuals">VISUALS</h2>
+  <label class="worm-setting-toggle"><span data-word="glow">Enhanced glow</span><input type="checkbox" id="worm-setting-glow" checked><i aria-hidden="true"></i></label>
+  <label class="worm-setting-toggle"><span data-word="names">Rival names</span><input type="checkbox" id="worm-setting-names" checked><i aria-hidden="true"></i></label>
+  <label class="worm-setting-range"><span data-word="zoom">Camera distance</span><strong id="worm-zoom-value">100%</strong><input id="worm-setting-zoom" type="range" min="75" max="140" step="5" value="100"></label>
+  <div class="worm-actions"><button class="worm-primary" id="worm-settings-back" data-word="backPause">BACK TO PAUSE</button></div>
+ </div>
+</div>
+<div id="worm-guide" class="worm-shade" hidden role="dialog" aria-modal="true">
+ <div class="worm-panel worm-guide-panel">
+  <div class="worm-guide-top"><span class="worm-eyebrow">INFINITY SPACE / FIELD GUIDE</span><span id="worm-guide-counter">01 / 03</span></div>
+  <h1 data-word="guideTitle">COSMIC WORMS</h1>
+  <div class="worm-guide-visual" aria-hidden="true"><span class="worm-guide-ring"></span><span class="worm-guide-orb"></span><span class="worm-guide-head"></span><span class="worm-guide-tail"></span></div>
+  <h2 id="worm-guide-step-title"></h2><p id="worm-guide-step-copy"></p>
+  <div class="worm-guide-dots" id="worm-guide-dots"><i></i><i></i><i></i></div>
+  <div class="worm-actions"><button id="worm-guide-skip" data-word="skip">SKIP</button><button id="worm-guide-next" class="worm-primary" data-word="next">NEXT</button></div>
+ </div>
+</div>
+<div id="worm-result" class="worm-shade" hidden role="dialog" aria-modal="true">
+ <div class="worm-panel">
+  <span class="worm-eyebrow" data-word="runOver">JOURNEY OVER</span>
+  <h1 data-word="destroyed">WORM DESTROYED</h1><p id="worm-result-info"></p>
+  <div class="worm-results">
+   <div><strong id="worm-result-length">0</strong><small data-word="length">LENGTH</small></div>
+   <div><strong id="worm-result-place">–</strong><small data-word="rank">RANK</small></div>
+   <div><strong id="worm-result-kills">0</strong><small data-word="kills">ELIMINATIONS</small></div>
+  </div>
+  <div class="worm-actions"><button class="worm-primary" id="worm-restart" data-word="again">PLAY AGAIN</button><button id="worm-result-menu" data-word="menu">CHANGE MODE</button></div>
+ </div>
+</div>
+<script src="player-profile.js"></script>
+<script src="platform.js"></script>
+<script src="https://bridge.playgama.com/v2/stable/playgama-bridge.js" defer></script>
+<script src="playgama-platform.js" defer></script>
+<script src="cosmic-worms.js?v=11" defer></script>
+</body>
+</html>

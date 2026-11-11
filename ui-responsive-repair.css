@@ -1,0 +1,270 @@
+/* Infinity Space — responsive navigation repairs, after all v15 styles.
+   Keep content reachable at 320px, avoid fixed-width text spilling outside panels. */
+body.ui-v15 #modal .screen,
+body.ui-v15 #modal .screen *,
+body.ui-v15 #screen-menu.hub-main-carousel .hub-mode-story *{
+ box-sizing:border-box;
+}
+body.ui-v15 #modal .br-full>.br-head{
+ display:flex;
+ align-items:center;
+ min-width:0;
+ gap:clamp(7px,1.8vw,20px);
+}
+body.ui-v15 #modal .br-full>.br-head>div:not(.music-wallet){
+ min-width:0;
+}
+body.ui-v15 #modal .br-full>.br-head h2,
+body.ui-v15 #modal .br-full>.br-head .br-serial{
+ overflow-wrap:break-word;
+ word-break:normal;
+ hyphens:auto;
+ max-width:100%;
+}
+body.ui-v15 #modal .br-full>.br-head h2{
+ line-height:1.12;
+ letter-spacing:-.045em;
+}
+body.ui-v15 #modal .br-head-back{
+ display:flex;align-items:center;justify-content:center;
+ flex-shrink:0;
+}
+body.ui-v15 #modal .br-settings-layout,
+body.ui-v15 #modal .br-settings-main,
+body.ui-v15 #modal .br-settings-nav,
+body.ui-v15 #modal .br-ach-layout,
+body.ui-v15 #modal .br-ach-content,
+body.ui-v15 #modal .br-best-layout,
+body.ui-v15 #modal .br-best-details,
+body.ui-v15 #modal .music-layout,
+body.ui-v15 #modal .music-track-grid{
+ min-width:0;
+}
+body.ui-v15 #modal .br-option,
+body.ui-v15 #modal .br-option>*,
+body.ui-v15 #modal .br-ach-row,
+body.ui-v15 #modal .br-best-row,
+body.ui-v15 #modal .music-track-card,
+body.ui-v15 #modal .map-corner.left>*{
+ min-width:0;
+}
+body.ui-v15 #modal .br-ach-copy strong,
+body.ui-v15 #modal .br-ach-copy small,
+body.ui-v15 #modal .br-best-name,
+body.ui-v15 #modal .br-best-details p,
+body.ui-v15 #modal .br-option strong,
+body.ui-v15 #modal .br-option small{
+ overflow-wrap:anywhere;
+}
+body.ui-v15 #modal #screen-map .map-header{
+ display:flex;
+ align-items:center;
+ min-width:0;
+ box-sizing:border-box;
+}
+body.ui-v15 #modal #screen-map .map-header .header-title{
+ min-width:0;flex:1 1 auto;
+ overflow-wrap:break-word;
+}
+body.ui-v15 #modal #screen-map .map-header .header-right{
+ flex:0 0 auto;
+ margin-left:auto;
+}
+body.ui-v15 #modal #screen-map .map-corner.left .v15-map-details,
+body.ui-v15 #modal #screen-map .map-corner.left .v15-map-details>*{
+ min-width:0;max-width:100%;
+}
+body.ui-v15 #modal #screen-map .atlas-pins{
+ max-width:100%;
+}
+body.ui-v15 #modal #screen-map .atlas-pins input,
+body.ui-v15 #modal #screen-map .atlas-pins select{
+ min-width:0;max-width:100%;
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-mode-story-top{
+ min-width:0;max-width:100%;
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-mode-story-copy,
+body.ui-v15 #screen-menu.hub-main-carousel .hub-mode-story-footer{
+ min-width:0;
+}
+body.ui-v15 #screen-menu.hub-main-carousel .hub-mode-story-home{
+ overflow-wrap:anywhere;
+}
+@media(max-width:800px){
+ body.ui-v15 #modal .br-full>.br-head{
+  left:10px;right:10px;
+  gap:10px;
+ }
+ body.ui-v15 #modal .br-full>.br-head .br-head-back{
+  min-width:78px;
+  min-height:39px;
+  padding:7px 9px;
+  font-size:10px;
+ }
+ body.ui-v15 #modal .br-full>.br-head .br-head-back svg{
+  width:16px;height:16px;
+ }
+ body.ui-v15 #modal .br-full>.br-head h2{
+  font-size:clamp(16px,3.6vw,25px);
+  line-height:1.07;
+ }
+ body.ui-v15 #modal .br-full>.br-head .br-serial{
+  font-size:9px;
+  line-height:1.2;
+  letter-spacing:.05em;
+ }
+ body.ui-v15 #modal #screen-map .map-header{
+  padding:0 12px;
+  gap:9px;
+ }
+ body.ui-v15 #modal #screen-map .map-header .back{
+  flex:0 0 auto;
+  min-width:77px;
+  padding:8px 10px;
+  min-height:40px;
+  font-size:10px;
+ }
+ body.ui-v15 #modal #screen-map .map-header .header-title{
+  margin-left:0;
+  font-size:clamp(13px,2.8vw,18px)!important;
+  line-height:1.13;
+ }
+ body.ui-v15 #modal #screen-map .map-header .header-right{
+  margin-left:0;gap:0;
+ }
+ body.ui-v15 #modal #screen-map .map-header .header-right .icon-btn{
+  width:39px;min-width:39px;height:39px;
+ }
+ body.ui-v15 #modal #screen-settings .br-settings-nav{
+  min-width:0;
+ }
+ body.ui-v15 #modal #screen-settings .br-tab{
+  min-width:0;
+ }
+ body.ui-v15 #modal #screen-settings .br-tab>span:nth-child(2){
+  flex:1 1 auto;
+  min-width:0;
+  overflow-wrap:anywhere;
+ }
+ body.ui-v15 #modal #screen-settings .br-settings-main{
+  padding-left:clamp(9px,3vw,18px);
+  padding-right:clamp(9px,3vw,18px);
+ }
+ body.ui-v15 #modal #screen-music .music-wallet{
+  flex:0 0 auto;
+  min-width:0;
+ }
+}
+@media(max-width:440px){
+ body.ui-v15 #modal .br-full>.br-head{
+  left:9px;right:9px;
+  gap:7px;
+ }
+ body.ui-v15 #modal .br-full>.br-head .br-head-back{
+  min-width:69px;width:69px;
+  min-height:38px;
+  font-size:9px;
+  gap:5px;
+  padding:5px;
+ }
+ body.ui-v15 #modal .br-full>.br-head h2{
+  font-size:clamp(14px,4.2vw,19px)!important;
+  line-height:1.08;
+  margin-top:3px;
+  letter-spacing:-.045em;
+ }
+ body.ui-v15 #modal .br-full>.br-head .br-serial{
+  font-size:8px;
+  letter-spacing:0;
+  line-height:1.15;
+ }
+ body.ui-v15 #modal .br-full>.br-head .br-head-tag{
+  display:none!important;
+ }
+ body.ui-v15 #modal #screen-music .br-head.music-header{
+  gap:5px;
+ }
+ body.ui-v15 #modal #screen-music .music-wallet{
+  gap:3px;
+  padding:6px;
+  max-width:80px;
+  border-radius:6px;
+ }
+ body.ui-v15 #modal #screen-music .music-wallet small{
+  display:none;
+ }
+ body.ui-v15 #modal #screen-music .music-wallet strong{
+  font-size:clamp(11px,3vw,14px);
+ }
+ body.ui-v15 #modal #screen-music .music-wallet .wallet-symbol{
+  font-size:12px;
+ }
+ body.ui-v15 #modal #screen-map .map-header{
+  padding:0 9px;gap:7px;
+ }
+ body.ui-v15 #modal #screen-map .map-header .header-title .overline{
+  display:none;
+ }
+ body.ui-v15 #modal #screen-settings .br-settings-nav{
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:4px;
+ }
+ body.ui-v15 #modal #screen-settings .br-tab{
+  min-width:0!important;
+  width:auto!important;
+  gap:3px;
+  padding:5px 3px!important;
+  flex-direction:column;
+  justify-content:center;
+  text-align:center;
+ }
+ body.ui-v15 #modal #screen-settings .br-tab>span:nth-child(2){
+  display:block;
+  flex:none;
+  font-size:clamp(7px,2.2vw,9px)!important;
+  line-height:1.03;
+  overflow-wrap:anywhere;
+  max-width:100%;
+ }
+ body.ui-v15 #modal #screen-settings .br-tab svg{
+  flex:none;width:17px;height:17px;
+ }
+ body.ui-v15 #modal #screen-settings .br-tab small,
+ body.ui-v15 #modal #screen-settings .br-tab>b{display:none!important}
+ body.ui-v15 #screen-menu.hub-main-carousel .hub-mode-story-home{
+  font-size:7.2px;
+  flex:0 1 auto;
+  max-width:78px;
+  letter-spacing:-.035em;
+  white-space:normal;
+  line-height:1.15;
+  overflow:visible;
+ }
+}
+@media(max-width:360px){
+ body.ui-v15 #modal #screen-music .br-head.music-header .br-serial{
+  display:none;
+ }
+ body.ui-v15 #modal #screen-music .br-head.music-header h2{
+  font-size:14px!important;
+ }
+ body.ui-v15 #modal #screen-music .music-wallet{
+  max-width:68px;
+  padding:5px 3px;
+ }
+ body.ui-v15 #modal #screen-map .map-header .back{
+  min-width:69px;
+  padding:7px;
+ }
+ body.ui-v15 #modal #screen-map .map-header .header-right .icon-btn{
+  width:36px;min-width:36px;height:36px;
+ }
+ body.ui-v15 #modal #screen-achievements .br-serial,
+ body.ui-v15 #modal #screen-bestiary .br-serial{
+  font-size:7px;
+ }
+ body.ui-v15 #modal #screen-map .map-corner.left .map-big{
+  font-size:clamp(14px,4.2vw,20px);
+ }
+}
