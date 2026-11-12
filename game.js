@@ -4958,7 +4958,7 @@ if(window.SpaceUIv15Templates && document.createElement('template').content){
  const originalRender=renderUI;renderUI=function(...args){originalRender(...args);refreshV15();};
  function refreshV15(){
   refreshPhoneSettings();
-  qa(hud,'[data-quick-upgrade]').forEach(b=>{const u=upgrades.find(u=>u.id===b.dataset.quickUpgrade),quote=upgradeQuote(u);b.innerHTML='<span>'+esc(u.name)+'<small>LVL '+fmt(g.upgrade[u.id])+'</small></span><b>'+((quote.count&&Number.isFinite(quote.cost))?'✦ '+fmt(quote.cost):'—')+'</b>';b.disabled=!quote.count||!Number.isFinite(quote.cost)||quote.cost>g.credits;});
+  qa(hud,'[data-quick-upgrade]').forEach(b=>{const u=upgrades.find(u=>u.id===b.dataset.quickUpgrade),quote=upgradeQuote(u);b.innerHTML='<span>'+esc(u.name)+'<small>'+L('LVL ','УР. ','NV. ')+fmt(g.upgrade[u.id])+'</small></span><b>'+((quote.count&&Number.isFinite(quote.cost))?'✦ '+fmt(quote.cost):'—')+'</b>';b.disabled=!quote.count||!Number.isFinite(quote.cost)||quote.cost>g.credits;});
    qa(hud,'[data-quick-qty]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.quickQty===String(g.buyAmount))));
    const mute=q(hud,'[data-audio-action="mute"]');
    if(mute){const audible=g.music||g.sound;mute.setAttribute('aria-pressed',String(audible));mute.setAttribute('aria-label',audible?L('Mute all sounds','Выключить весь звук','Silenciar todo'):L('Enable all sounds','Включить весь звук','Activar sonido'));mute.title=mute.getAttribute('aria-label');mute.innerHTML=uiIcon(audible?'music':'mute');}

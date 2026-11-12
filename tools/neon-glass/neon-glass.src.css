@@ -1,0 +1,359 @@
+/* ==========================================================================
+   NEON GLASS — единая дизайн-система Infinity Space
+   Подключается ПОСЛЕДНЕЙ на всех страницах (игра, Arena, Worms) и задаёт
+   один общий вид: цвета, шрифты, стекло, кнопки, свечение.
+
+   Правила файла:
+   - здесь только оформление (цвет, фон, рамка, тень, шрифт, скругление);
+   - размеры, отступы и расположение не трогаем — их проверяют тесты;
+   - !important нужен, пока под ним лежат старые слои CSS (ui-v15*, mobile-ui-polish …).
+     Когда старые файлы будут удалены, его можно убрать.
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+
+:root{
+  /* поверхности */
+  --ng-void:#050611;
+  --ng-glass:rgba(17,14,42,.78);
+  --ng-glass-soft:rgba(255,255,255,.045);
+  --ng-glass-hi:rgba(255,255,255,.12);
+  --ng-edge:rgba(160,140,255,.40);
+  --ng-edge-soft:rgba(160,140,255,.22);
+  /* пять цветов темы проекта (см. cosmic-spectrum.css); бирюза запрещена тестом worms-browser-smoke */
+  --ng-violet:#9922ff;
+  --ng-blue:#2860ff;
+  --ng-blue-hi:#5b8cff;   /* светлый тон синего для свечения и текста на тёмном */
+  --ng-red:#ff1744;
+  --ng-green:#27ff40;
+  --ng-gold:#ffe500;
+  /* текст */
+  --ng-text:#f6f4ff;
+  --ng-muted:#b9b4e0;
+  /* форма */
+  --ng-r-sm:10px;
+  --ng-r-md:14px;
+  --ng-r-pill:999px;
+  --ng-grad:linear-gradient(110deg,#2860ff 0%,#6a3cff 48%,#9922ff 100%);
+  --ng-grad-bar:linear-gradient(90deg,#2860ff,#9922ff 60%,#ff1744);
+  --ng-glow-violet:0 0 22px rgba(153,34,255,.42);
+  --ng-glow-blue:0 0 20px rgba(91,140,255,.45);
+  --ng-font-display:'Exo 2','Segoe UI',system-ui,sans-serif;
+  --ng-font-body:'Inter','Segoe UI',system-ui,sans-serif;
+
+  /* перекрываем старые переменные, чтобы слои, которые на них опираются, перекрасились */
+  --cyan:var(--ng-blue-hi)!important;
+  --purple:var(--ng-violet)!important;
+  --gold:var(--ng-gold)!important;
+  --text:var(--ng-text)!important;
+  --muted:var(--ng-muted)!important;
+  --sub:var(--ng-muted)!important;
+  --glow:#b79cff!important;
+}
+
+/* ---------- Типографика: два шрифта, у каждого своя роль ---------- */
+html,body,button,input,select,textarea{font-family:var(--ng-font-body)!important}
+h1,h2,h3,
+.hero-title,.hero,.hub-mode-story-title,.overlay-title,.tracking,
+.mass-number,.hud-resources strong,.top-stats strong,.stat strong,.stat b,
+.worm-metric strong,.worm-panel h1,.worm-results strong,.result-cell b,
+.primary,.big-play,.worm-primary,.secondary-button,.upgrade-price,
+.hub-story-shortcut,.ability,.worm-boost-button,.worm-pause-button{
+  font-family:var(--ng-font-display)!important;
+}
+.hero-title,.hero,.hub-mode-story-title,.overlay-title,.worm-panel h1{font-weight:800!important}
+
+/* ---------- Стеклянная панель (общая для всех режимов) ---------- */
+.stat,.brand,.left,#radar,.hint,.mode,.panel,
+.mass-block,.evo-status,.hud-resources>div,.hud-left,.upgrade-drawer,.upgrade-pull,
+.sidebar,.evolution-panel,.world-label,.toast,.toast-root>*,.achievement-unlock,.notification,
+.worm-brand,.worm-metric,.worm-leaders,.worm-radar,.worm-hint,.worm-panel,
+.modal-card,.menu-card,.atlas-card,.tester-panel{
+  background:linear-gradient(165deg,var(--ng-glass-hi) 0%,var(--ng-glass-soft) 34%,transparent 62%),var(--ng-glass)!important;
+  border:1px solid var(--ng-edge)!important;
+  border-radius:var(--ng-r-md)!important;
+  box-shadow:0 10px 34px rgba(3,2,16,.55),inset 0 1px 0 rgba(255,255,255,.16),0 0 26px rgba(153,34,255,.12)!important;
+  color:var(--ng-text)!important;
+}
+/* размытие фона — только у больших окон поверх замершей сцены, чтобы не ронять FPS у HUD */
+.panel,.worm-panel,.modal-card,.menu-card,.atlas-card{
+  -webkit-backdrop-filter:blur(16px) saturate(1.25);
+  backdrop-filter:blur(16px) saturate(1.25);
+}
+.modal-backdrop,.shade,.worm-shade{background:rgba(4,4,16,.72)!important}
+
+/* ---------- Малые подписи читаемее ---------- */
+.hud-resources small,.top-stats small,.stat label,.stat small,.mass-detail,.label-sm,.hud-sub,
+.worm-metric small,.worm-radar small,.worm-brand small,.rank,.eyebrow,.worm-eyebrow{
+  color:var(--ng-muted)!important;
+}
+
+/* ---------- Иконки-кнопки HUD ---------- */
+.icon-btn,.square-button,.camera-buttons button,.brand-icon,
+.hub-mode-step,.hub-mode-nav-controls button,#pause,.worm-pause-button{
+  background:linear-gradient(165deg,var(--ng-glass-hi),var(--ng-glass-soft) 55%),var(--ng-glass)!important;
+  border:1px solid var(--ng-edge)!important;
+  border-bottom-width:1px!important;
+  border-radius:var(--ng-r-sm)!important;
+  color:var(--ng-text)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 4px 14px rgba(3,2,16,.45)!important;
+  transition:box-shadow .15s,transform .15s!important;
+}
+.icon-btn:hover,.square-button:hover,.camera-buttons button:hover,.brand-icon:hover,
+.hub-mode-step:hover,.hub-mode-nav-controls button:hover,#pause:hover,.worm-pause-button:hover{
+  border-color:var(--ng-blue-hi)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.2),var(--ng-glow-blue)!important;
+}
+.icon-btn:active,.square-button:active{transform:translateY(1px)!important}
+
+/* ---------- Кнопки: главная / второстепенная / опасная ---------- */
+.primary,.big-play,.hub-continue,.worm-primary,.hub-mode-story-play,.details-button{
+  background:var(--ng-grad)!important;
+  border:1px solid rgba(255,255,255,.34)!important;
+  border-bottom-width:1px!important;
+  border-radius:var(--ng-r-md)!important;
+  color:#fff!important;
+  text-shadow:0 1px 2px rgba(20,0,60,.45);
+  box-shadow:0 8px 28px rgba(40,96,255,.45),inset 0 1px 0 rgba(255,255,255,.4)!important;
+  transition:transform .15s,box-shadow .15s,filter .15s!important;
+}
+.primary:hover,.big-play:hover,.hub-continue:hover,.worm-primary:hover,.hub-mode-story-play:hover{
+  filter:brightness(1.12);
+  box-shadow:0 10px 36px rgba(153,34,255,.55),inset 0 1px 0 rgba(255,255,255,.45)!important;
+}
+.primary:active,.big-play:active,.worm-primary:active{transform:translateY(1px)!important}
+
+.secondary-button,.text-btn,.mode-back,.worm-actions button:not(.worm-primary),
+.upgrade-bulk button,.upgrade-presets button,.quick-upgrade-qty button,.tester-actions button{
+  background:linear-gradient(165deg,var(--ng-glass-hi),var(--ng-glass-soft) 55%),var(--ng-glass)!important;
+  border:1px solid var(--ng-edge)!important;
+  border-bottom-width:1px!important;
+  border-radius:var(--ng-r-sm)!important;
+  color:var(--ng-text)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.14)!important;
+}
+.secondary-button:hover,.text-btn:hover,.mode-back:hover,.worm-actions button:not(.worm-primary):hover,
+.upgrade-bulk button:hover,.upgrade-presets button:hover,.quick-upgrade-qty button:hover{
+  border-color:var(--ng-violet)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.18),var(--ng-glow-violet)!important;
+}
+.danger,button.danger,.tester-absolute-reset{
+  background:linear-gradient(165deg,rgba(255,77,109,.30),rgba(255,77,109,.10)),var(--ng-glass)!important;
+  border:1px solid rgba(255,77,109,.7)!important;
+  color:#ffe3e8!important;
+}
+
+/* ---------- Улучшения ---------- */
+.upgrade,.drawer-up{
+  background:linear-gradient(165deg,var(--ng-glass-hi),var(--ng-glass-soft) 55%),var(--ng-glass)!important;
+  border:1px solid var(--ng-edge-soft)!important;
+  border-bottom-width:1px!important;
+  border-radius:var(--ng-r-sm)!important;
+  color:var(--ng-text)!important;
+}
+.upgrade:not(:disabled):hover,.drawer-up:not(:disabled):hover{
+  border-color:var(--ng-gold)!important;
+  box-shadow:0 0 18px rgba(255,201,77,.30)!important;
+}
+.upgrade:disabled,.drawer-up:disabled{opacity:.55!important}
+.upgrade-price,.drawer-up b,.res-star,.stat-icon.gold{color:var(--ng-gold)!important}
+.res-hex,.stat-icon{color:var(--ng-blue-hi)!important}
+.upgrade-pull b{background:var(--ng-red)!important;color:#fff!important;border-radius:var(--ng-r-pill)!important}
+
+/* ---------- Прогресс эволюции и способности ---------- */
+.progress-bar,.progress-track,.cooldown-fill{
+  background:rgba(255,255,255,.10)!important;
+  border:1px solid var(--ng-edge-soft)!important;
+  border-radius:var(--ng-r-pill)!important;
+}
+.progress-bar>span,.progress-fill{
+  background:var(--ng-grad-bar)!important;
+  border-radius:var(--ng-r-pill)!important;
+  box-shadow:0 0 14px rgba(91,140,255,.6)!important;
+}
+.ability,.ability-btn,.worm-boost-button{
+  background:linear-gradient(165deg,rgba(40,96,255,.34),rgba(153,34,255,.16) 60%),var(--ng-glass)!important;
+  border:1px solid rgba(91,140,255,.8)!important;
+  border-bottom-width:1px!important;
+  border-radius:var(--ng-r-md)!important;
+  color:#fff!important;
+  box-shadow:var(--ng-glow-blue),inset 0 1px 0 rgba(255,255,255,.2)!important;
+}
+.ability.cooling,.ability:disabled,.ability-btn[data-cooling="true"]{border-color:var(--ng-edge-soft)!important;box-shadow:none!important}
+.worm-boost-button{background:linear-gradient(165deg,rgba(255,23,68,.36),rgba(153,34,255,.14) 60%),var(--ng-glass)!important;border-color:rgba(255,23,68,.8)!important;box-shadow:0 0 22px rgba(255,23,68,.38)!important}
+.worm-boost-button:hover{border-color:var(--ng-red)!important}
+
+/* метка «Готово» у способностей */
+.ability-cooldown-label{
+  background:var(--ng-blue-hi)!important;
+  border:0!important;
+  color:#04141f!important;
+  font-weight:800!important;
+  border-radius:var(--ng-r-pill)!important;
+}
+.ability-btn[data-cooling="true"] .ability-cooldown-label{background:rgba(255,255,255,.16)!important;color:var(--ng-text)!important}
+
+/* ---------- Плитки быстрого меню: одно стекло, у каждой свой акцент ---------- */
+.hub-story-shortcut{
+  --tile:var(--ng-violet);
+  background:linear-gradient(165deg,var(--ng-glass-hi),var(--ng-glass-soft) 55%),var(--ng-glass)!important;
+  border:1px solid color-mix(in srgb,var(--tile) 60%,transparent)!important;
+  border-bottom-width:1px!important;
+  border-radius:var(--ng-r-md)!important;
+  color:var(--ng-text)!important;
+  box-shadow:inset 0 -2px 0 var(--tile),0 6px 20px rgba(3,2,16,.5)!important;
+}
+.hub-story-shortcut:hover{border-color:var(--tile)!important;box-shadow:inset 0 -2px 0 var(--tile),0 0 22px color-mix(in srgb,var(--tile) 55%,transparent)!important}
+.hub-story-shortcut-icon{
+  background:color-mix(in srgb,var(--tile) 26%,transparent)!important;
+  border:1px solid color-mix(in srgb,var(--tile) 70%,transparent)!important;
+  border-radius:var(--ng-r-sm)!important;
+  color:color-mix(in srgb,var(--tile) 55%,#fff)!important;
+}
+.hub-story-shortcut[data-shortcut="map"]{--tile:var(--ng-blue)}
+.hub-story-shortcut[data-shortcut="evolution"]{--tile:var(--ng-violet)}
+.hub-story-shortcut[data-shortcut="achievements"]{--tile:var(--ng-gold)}
+.hub-story-shortcut[data-shortcut="music"]{--tile:var(--ng-violet)}
+.hub-story-shortcut[data-shortcut="bestiary"]{--tile:var(--ng-red)}
+.hub-story-shortcut[data-shortcut="statistics"]{--tile:var(--ng-green)}
+.hub-story-shortcut[data-shortcut="settings"]{--tile:var(--ng-blue)}
+.hub-story-shortcut[data-shortcut="new"]{--tile:var(--ng-red)}
+
+/* ---------- Строки настроек, поля, переключатели ---------- */
+.settings-line,.worm-setting-toggle,.worm-setting-range{
+  background:var(--ng-glass-soft)!important;
+  border:1px solid var(--ng-edge-soft)!important;
+  border-radius:var(--ng-r-sm)!important;
+  color:var(--ng-text)!important;
+}
+select,input[type=number],input[type=text]{
+  background:rgba(8,7,26,.85)!important;
+  border:1px solid var(--ng-edge)!important;
+  border-radius:var(--ng-r-sm)!important;
+  color:var(--ng-text)!important;
+}
+input[type=range]{accent-color:var(--ng-blue-hi)}
+input[type=checkbox]{accent-color:var(--ng-violet)}
+
+/* ---------- Заголовки окон ---------- */
+.eyebrow,.worm-eyebrow{color:var(--ng-blue-hi)!important}
+.hero-title em,.hero em{
+  background:var(--ng-grad-bar);
+  -webkit-background-clip:text;background-clip:text;
+  color:transparent!important;
+}
+
+
+/* значок масштаба камеры */
+.zoom-glyph{
+  background:linear-gradient(145deg,rgba(153,34,255,.55),rgba(40,96,255,.35))!important;
+  border:1px solid var(--ng-edge)!important;
+  border-bottom-width:1px!important;
+  border-radius:7px!important;
+  box-shadow:inset 0 1px rgba(255,255,255,.3)!important;
+}
+.zoom-glyph::before,.zoom-glyph::after{background:#fff!important;box-shadow:0 0 8px rgba(91,140,255,.85)!important}
+
+.brand b em,.worm-brand em{color:var(--ng-gold)!important}
+
+/* наведение на главные кнопки: единый светлый ободок */
+.primary:hover,.big-play:hover,.hub-continue:hover,.hub-mode-story-play:hover,.details-button:hover{border-color:var(--ng-blue-hi)!important}
+.worm-primary:hover{border-color:var(--ng-blue)!important}
+.worm-pause-button:hover{border-color:var(--ng-blue)!important}
+
+
+/* ==========================================================================
+   Внутренние экраны: эволюция, достижения, музыка, настройки, карта, бестиарий
+   Крупные блоки = стекло с рамкой. Строки и карточки внутри = лёгкое стекло без
+   перекраски рамки (у достижений цвет рамки означает редкость).
+   ========================================================================== */
+/* крупные блоки */
+.evo-v2-current,.evo-v2-goals,.evo-v2-gallery,
+.br-settings-main,.br-settings-aside,.br-ach-summary,
+.music-player,.music-wallet,.br-best-details,.map-corner,.map-footer,
+.hub-profile-chip,.language-trigger,.small-brand{
+  background:linear-gradient(165deg,var(--ng-glass-hi) 0%,var(--ng-glass-soft) 34%,transparent 62%),var(--ng-glass)!important;
+  border:1px solid var(--ng-edge)!important;
+  border-radius:var(--ng-r-md)!important;
+  box-shadow:0 10px 34px rgba(3,2,16,.5),inset 0 1px 0 rgba(255,255,255,.14)!important;
+  color:var(--ng-text)!important;
+}
+/* строки и карточки */
+.evo-v2-form-card,.evo-v2-goal,.evo-v2-next,.evo-v2-inspector,
+.br-ach-row,.music-track-card,.br-best-row,.br-option,.br-readout-line,.br-controls>*{
+  background:linear-gradient(165deg,rgba(255,255,255,.07),rgba(255,255,255,.02) 55%),rgba(17,14,42,.62)!important;
+  border-bottom-width:1px!important;
+  border-radius:var(--ng-r-sm)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.10)!important;
+}
+.evo-v2-form-card:hover,.music-track-card:hover,.br-best-row:hover{box-shadow:inset 0 1px 0 rgba(255,255,255,.14),var(--ng-glow-violet)!important}
+.evo-v2-form-card.current,.br-best-row.selected,.music-track-card.selected{
+  border-color:var(--ng-blue-hi)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.14),var(--ng-glow-blue)!important;
+}
+/* кнопки «Назад», фильтры, мелкие действия */
+.back,.br-head-back,.mini-link,.br-foot-secondary,.br-small-action,.atlas-control,
+.br-filter,.evo-v2-filters button,.game-select-trigger,.music-control,.music-track-preview{
+  background:linear-gradient(165deg,var(--ng-glass-hi),var(--ng-glass-soft) 55%),var(--ng-glass)!important;
+  border:1px solid var(--ng-edge)!important;
+  border-bottom-width:1px!important;
+  border-radius:var(--ng-r-sm)!important;
+  color:var(--ng-text)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.14)!important;
+}
+.back:hover,.br-head-back:hover,.mini-link:hover,.br-foot-secondary:hover,.br-small-action:hover,.atlas-control:hover,
+.br-filter:hover,.evo-v2-filters button:hover,.game-select-trigger:hover,.music-control:hover,.music-track-preview:hover{
+  border-color:var(--ng-blue-hi)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.18),var(--ng-glow-blue)!important;
+}
+/* выбранные вкладки и фильтры = тот же градиент, что у главной кнопки */
+.br-tab.active,.br-filter.active,.evo-v2-filters button.active,.evo-v2-filters button[aria-pressed="true"],
+.br-switch.active{
+  background:var(--ng-grad)!important;
+  border-color:rgba(255,255,255,.34)!important;
+  color:#fff!important;
+  box-shadow:0 6px 22px rgba(40,96,255,.4),inset 0 1px 0 rgba(255,255,255,.35)!important;
+}
+.br-tab{
+  background:linear-gradient(165deg,rgba(255,255,255,.07),rgba(255,255,255,.02) 55%),rgba(17,14,42,.62)!important;
+  border:1px solid var(--ng-edge-soft)!important;
+  border-bottom-width:1px!important;
+  border-radius:var(--ng-r-sm)!important;
+  color:var(--ng-text)!important;
+}
+.br-tab.active{border-color:rgba(255,255,255,.34)!important}
+/* главные действия */
+.br-foot-primary,.br-inline-cta,.map-accent-action,.music-control-play,
+.music-track-actions button:not(.music-track-preview):not(.chosen){
+  background:var(--ng-grad)!important;
+  border:1px solid rgba(255,255,255,.34)!important;
+  border-bottom-width:1px!important;
+  border-radius:var(--ng-r-md)!important;
+  color:#fff!important;
+  text-shadow:0 1px 2px rgba(20,0,60,.45);
+  box-shadow:0 6px 22px rgba(40,96,255,.4),inset 0 1px 0 rgba(255,255,255,.35)!important;
+}
+.br-foot-primary:hover,.br-inline-cta:hover,.map-accent-action:hover,.music-control-play:hover,
+.music-track-actions button:not(.music-track-preview):not(.chosen):hover{filter:brightness(1.12);border-color:var(--ng-blue-hi)!important}
+/* «Выбрано» у трека */
+.music-track-actions button.chosen{
+  background:rgba(39,255,64,.14)!important;
+  border:1px solid rgba(39,255,64,.7)!important;
+  border-bottom-width:1px!important;
+  color:#c9ffd1!important;
+  box-shadow:none!important;
+}
+/* опасное действие в настройках */
+.br-small-action.warn{
+  background:linear-gradient(165deg,rgba(255,23,68,.30),rgba(255,23,68,.10)),var(--ng-glass)!important;
+  border-color:rgba(255,23,68,.7)!important;
+  color:#ffe3e8!important;
+}
+/* шкалы */
+.evo-v2-meter{background:rgba(255,255,255,.10)!important;border-radius:var(--ng-r-pill)!important}
+.evo-v2-meter i{background:var(--ng-grad-bar)!important;border-radius:var(--ng-r-pill)!important;box-shadow:0 0 12px rgba(91,140,255,.55)!important}
+
+/* ---------- Единый видимый фокус и уважение к reduced-motion ---------- */
+:focus-visible{outline:2px solid #fff!important;outline-offset:3px!important}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}
+}

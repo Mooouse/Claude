@@ -122,7 +122,7 @@
   overlay.setAttribute('aria-label',t(['Game mode selection','Выбор режима игры','Elegir modo de juego']));
   overlay.innerHTML='<header class="hub-mode-story-top">'+
     '<span class="hub-mode-story-home">INFINITY SPACE</span>'+
-    '<div class="hub-mode-story-brand">INFINITY SPACE <span>/</span> GAME MODES</div>'+
+    '<div class="hub-mode-story-brand">'+t(['GAME MODES','РЕЖИМЫ ИГРЫ','MODOS DE JUEGO'])+'</div>'+
     '<div class="hub-story-quick" aria-label="Daily rewards"></div>'+
     '<button class="hub-profile-chip" type="button" aria-label="Profile"><span aria-hidden="true">✧</span><span class="hub-profile-name">PLAYER</span></button>'+
     '<span class="hub-mode-story-counter"></span></header>'+

@@ -1,0 +1,337 @@
+/* GENERATED from neon-glass.src.css: selectors carry the #ng#ng#ng prefix (needs id="ng" on <html>). */
+/* ==========================================================================
+   NEON GLASS — единая дизайн-система Infinity Space
+   Подключается ПОСЛЕДНЕЙ на всех страницах (игра, Arena, Worms) и задаёт
+   один общий вид: цвета, шрифты, стекло, кнопки, свечение.
+
+   Правила файла:
+   - здесь только оформление (цвет, фон, рамка, тень, шрифт, скругление);
+   - размеры, отступы и расположение не трогаем — их проверяют тесты;
+   - !important нужен, пока под ним лежат старые слои CSS (ui-v15*, mobile-ui-polish …).
+     Когда старые файлы будут удалены, его можно убрать.
+   ========================================================================== */@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+
+
+:root{
+  /* поверхности */
+  --ng-void:#050611;
+  --ng-glass:rgba(17,14,42,.78);
+  --ng-glass-soft:rgba(255,255,255,.045);
+  --ng-glass-hi:rgba(255,255,255,.12);
+  --ng-edge:rgba(160,140,255,.40);
+  --ng-edge-soft:rgba(160,140,255,.22);
+  /* пять цветов темы проекта (см. cosmic-spectrum.css); бирюза запрещена тестом worms-browser-smoke */
+  --ng-violet:#9922ff;
+  --ng-blue:#2860ff;
+  --ng-blue-hi:#5b8cff;   /* светлый тон синего для свечения и текста на тёмном */
+  --ng-red:#ff1744;
+  --ng-green:#27ff40;
+  --ng-gold:#ffe500;
+  /* текст */
+  --ng-text:#f6f4ff;
+  --ng-muted:#b9b4e0;
+  /* форма */
+  --ng-r-sm:10px;
+  --ng-r-md:14px;
+  --ng-r-pill:999px;
+  --ng-grad:linear-gradient(110deg,#2860ff 0%,#6a3cff 48%,#9922ff 100%);
+  --ng-grad-bar:linear-gradient(90deg,#2860ff,#9922ff 60%,#ff1744);
+  --ng-glow-violet:0 0 22px rgba(153,34,255,.42);
+  --ng-glow-blue:0 0 20px rgba(91,140,255,.45);
+  --ng-font-display:'Exo 2','Segoe UI',system-ui,sans-serif;
+  --ng-font-body:'Inter','Segoe UI',system-ui,sans-serif;
+
+  /* перекрываем старые переменные, чтобы слои, которые на них опираются, перекрасились */
+  --cyan:var(--ng-blue-hi)!important;
+  --purple:var(--ng-violet)!important;
+  --gold:var(--ng-gold)!important;
+  --text:var(--ng-text)!important;
+  --muted:var(--ng-muted)!important;
+  --sub:var(--ng-muted)!important;
+  --glow:#b79cff!important;
+}/* ---------- Типографика: два шрифта, у каждого своя роль ---------- */
+
+
+html#ng#ng#ng, #ng#ng#ng body, #ng#ng#ng button, #ng#ng#ng input, #ng#ng#ng select, #ng#ng#ng textarea{font-family:var(--ng-font-body)!important}
+#ng#ng#ng h1, #ng#ng#ng h2, #ng#ng#ng h3, #ng#ng#ng .hero-title, #ng#ng#ng .hero, #ng#ng#ng .hub-mode-story-title, #ng#ng#ng .overlay-title, #ng#ng#ng .tracking, #ng#ng#ng .mass-number, #ng#ng#ng .hud-resources strong, #ng#ng#ng .top-stats strong, #ng#ng#ng .stat strong, #ng#ng#ng .stat b, #ng#ng#ng .worm-metric strong, #ng#ng#ng .worm-panel h1, #ng#ng#ng .worm-results strong, #ng#ng#ng .result-cell b, #ng#ng#ng .primary, #ng#ng#ng .big-play, #ng#ng#ng .worm-primary, #ng#ng#ng .secondary-button, #ng#ng#ng .upgrade-price, #ng#ng#ng .hub-story-shortcut, #ng#ng#ng .ability, #ng#ng#ng .worm-boost-button, #ng#ng#ng .worm-pause-button{
+  font-family:var(--ng-font-display)!important;
+}
+#ng#ng#ng .hero-title, #ng#ng#ng .hero, #ng#ng#ng .hub-mode-story-title, #ng#ng#ng .overlay-title, #ng#ng#ng .worm-panel h1{font-weight:800!important}/* ---------- Стеклянная панель (общая для всех режимов) ---------- */
+
+
+#ng#ng#ng .stat, #ng#ng#ng .brand, #ng#ng#ng .left, #ng#ng#ng #radar, #ng#ng#ng .hint, #ng#ng#ng .mode, #ng#ng#ng .panel, #ng#ng#ng .mass-block, #ng#ng#ng .evo-status, #ng#ng#ng .hud-resources>div, #ng#ng#ng .hud-left, #ng#ng#ng .upgrade-drawer, #ng#ng#ng .upgrade-pull, #ng#ng#ng .sidebar, #ng#ng#ng .evolution-panel, #ng#ng#ng .world-label, #ng#ng#ng .toast, #ng#ng#ng .toast-root>*, #ng#ng#ng .achievement-unlock, #ng#ng#ng .notification, #ng#ng#ng .worm-brand, #ng#ng#ng .worm-metric, #ng#ng#ng .worm-leaders, #ng#ng#ng .worm-radar, #ng#ng#ng .worm-hint, #ng#ng#ng .worm-panel, #ng#ng#ng .modal-card, #ng#ng#ng .menu-card, #ng#ng#ng .atlas-card, #ng#ng#ng .tester-panel{
+  background:linear-gradient(165deg,var(--ng-glass-hi) 0%,var(--ng-glass-soft) 34%,transparent 62%),var(--ng-glass)!important;
+  border:1px solid var(--ng-edge)!important;
+  border-radius:var(--ng-r-md)!important;
+  box-shadow:0 10px 34px rgba(3,2,16,.55),inset 0 1px 0 rgba(255,255,255,.16),0 0 26px rgba(153,34,255,.12)!important;
+  color:var(--ng-text)!important;
+}/* размытие фона — только у больших окон поверх замершей сцены, чтобы не ронять FPS у HUD */
+
+#ng#ng#ng .panel, #ng#ng#ng .worm-panel, #ng#ng#ng .modal-card, #ng#ng#ng .menu-card, #ng#ng#ng .atlas-card{
+  -webkit-backdrop-filter:blur(16px) saturate(1.25);
+  backdrop-filter:blur(16px) saturate(1.25);
+}
+#ng#ng#ng .modal-backdrop, #ng#ng#ng .shade, #ng#ng#ng .worm-shade{background:rgba(4,4,16,.72)!important}/* ---------- Малые подписи читаемее ---------- */
+
+
+#ng#ng#ng .hud-resources small, #ng#ng#ng .top-stats small, #ng#ng#ng .stat label, #ng#ng#ng .stat small, #ng#ng#ng .mass-detail, #ng#ng#ng .label-sm, #ng#ng#ng .hud-sub, #ng#ng#ng .worm-metric small, #ng#ng#ng .worm-radar small, #ng#ng#ng .worm-brand small, #ng#ng#ng .rank, #ng#ng#ng .eyebrow, #ng#ng#ng .worm-eyebrow{
+  color:var(--ng-muted)!important;
+}/* ---------- Иконки-кнопки HUD ---------- */
+
+
+#ng#ng#ng .icon-btn, #ng#ng#ng .square-button, #ng#ng#ng .camera-buttons button, #ng#ng#ng .brand-icon, #ng#ng#ng .hub-mode-step, #ng#ng#ng .hub-mode-nav-controls button, #ng#ng#ng #pause, #ng#ng#ng .worm-pause-button{
+  background:linear-gradient(165deg,var(--ng-glass-hi),var(--ng-glass-soft) 55%),var(--ng-glass)!important;
+  border:1px solid var(--ng-edge)!important;
+  border-bottom-width:1px!important;
+  border-radius:var(--ng-r-sm)!important;
+  color:var(--ng-text)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 4px 14px rgba(3,2,16,.45)!important;
+  transition:box-shadow .15s,transform .15s!important;
+}
+#ng#ng#ng .icon-btn:hover, #ng#ng#ng .square-button:hover, #ng#ng#ng .camera-buttons button:hover, #ng#ng#ng .brand-icon:hover, #ng#ng#ng .hub-mode-step:hover, #ng#ng#ng .hub-mode-nav-controls button:hover, #ng#ng#ng #pause:hover, #ng#ng#ng .worm-pause-button:hover{
+  border-color:var(--ng-blue-hi)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.2),var(--ng-glow-blue)!important;
+}
+#ng#ng#ng .icon-btn:active, #ng#ng#ng .square-button:active{transform:translateY(1px)!important}/* ---------- Кнопки: главная / второстепенная / опасная ---------- */
+
+
+#ng#ng#ng .primary, #ng#ng#ng .big-play, #ng#ng#ng .hub-continue, #ng#ng#ng .worm-primary, #ng#ng#ng .hub-mode-story-play, #ng#ng#ng .details-button{
+  background:var(--ng-grad)!important;
+  border:1px solid rgba(255,255,255,.34)!important;
+  border-bottom-width:1px!important;
+  border-radius:var(--ng-r-md)!important;
+  color:#fff!important;
+  text-shadow:0 1px 2px rgba(20,0,60,.45);
+  box-shadow:0 8px 28px rgba(40,96,255,.45),inset 0 1px 0 rgba(255,255,255,.4)!important;
+  transition:transform .15s,box-shadow .15s,filter .15s!important;
+}
+#ng#ng#ng .primary:hover, #ng#ng#ng .big-play:hover, #ng#ng#ng .hub-continue:hover, #ng#ng#ng .worm-primary:hover, #ng#ng#ng .hub-mode-story-play:hover{
+  filter:brightness(1.12);
+  box-shadow:0 10px 36px rgba(153,34,255,.55),inset 0 1px 0 rgba(255,255,255,.45)!important;
+}
+#ng#ng#ng .primary:active, #ng#ng#ng .big-play:active, #ng#ng#ng .worm-primary:active{transform:translateY(1px)!important}
+
+#ng#ng#ng .secondary-button, #ng#ng#ng .text-btn, #ng#ng#ng .mode-back, #ng#ng#ng .worm-actions button:not(.worm-primary), #ng#ng#ng .upgrade-bulk button, #ng#ng#ng .upgrade-presets button, #ng#ng#ng .quick-upgrade-qty button, #ng#ng#ng .tester-actions button{
+  background:linear-gradient(165deg,var(--ng-glass-hi),var(--ng-glass-soft) 55%),var(--ng-glass)!important;
+  border:1px solid var(--ng-edge)!important;
+  border-bottom-width:1px!important;
+  border-radius:var(--ng-r-sm)!important;
+  color:var(--ng-text)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.14)!important;
+}
+#ng#ng#ng .secondary-button:hover, #ng#ng#ng .text-btn:hover, #ng#ng#ng .mode-back:hover, #ng#ng#ng .worm-actions button:not(.worm-primary):hover, #ng#ng#ng .upgrade-bulk button:hover, #ng#ng#ng .upgrade-presets button:hover, #ng#ng#ng .quick-upgrade-qty button:hover{
+  border-color:var(--ng-violet)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.18),var(--ng-glow-violet)!important;
+}
+#ng#ng#ng .danger, #ng#ng#ng button.danger, #ng#ng#ng .tester-absolute-reset{
+  background:linear-gradient(165deg,rgba(255,77,109,.30),rgba(255,77,109,.10)),var(--ng-glass)!important;
+  border:1px solid rgba(255,77,109,.7)!important;
+  color:#ffe3e8!important;
+}/* ---------- Улучшения ---------- */
+
+
+#ng#ng#ng .upgrade, #ng#ng#ng .drawer-up{
+  background:linear-gradient(165deg,var(--ng-glass-hi),var(--ng-glass-soft) 55%),var(--ng-glass)!important;
+  border:1px solid var(--ng-edge-soft)!important;
+  border-bottom-width:1px!important;
+  border-radius:var(--ng-r-sm)!important;
+  color:var(--ng-text)!important;
+}
+#ng#ng#ng .upgrade:not(:disabled):hover, #ng#ng#ng .drawer-up:not(:disabled):hover{
+  border-color:var(--ng-gold)!important;
+  box-shadow:0 0 18px rgba(255,201,77,.30)!important;
+}
+#ng#ng#ng .upgrade:disabled, #ng#ng#ng .drawer-up:disabled{opacity:.55!important}
+#ng#ng#ng .upgrade-price, #ng#ng#ng .drawer-up b, #ng#ng#ng .res-star, #ng#ng#ng .stat-icon.gold{color:var(--ng-gold)!important}
+#ng#ng#ng .res-hex, #ng#ng#ng .stat-icon{color:var(--ng-blue-hi)!important}
+#ng#ng#ng .upgrade-pull b{background:var(--ng-red)!important;color:#fff!important;border-radius:var(--ng-r-pill)!important}/* ---------- Прогресс эволюции и способности ---------- */
+
+
+#ng#ng#ng .progress-bar, #ng#ng#ng .progress-track, #ng#ng#ng .cooldown-fill{
+  background:rgba(255,255,255,.10)!important;
+  border:1px solid var(--ng-edge-soft)!important;
+  border-radius:var(--ng-r-pill)!important;
+}
+#ng#ng#ng .progress-bar>span, #ng#ng#ng .progress-fill{
+  background:var(--ng-grad-bar)!important;
+  border-radius:var(--ng-r-pill)!important;
+  box-shadow:0 0 14px rgba(91,140,255,.6)!important;
+}
+#ng#ng#ng .ability, #ng#ng#ng .ability-btn, #ng#ng#ng .worm-boost-button{
+  background:linear-gradient(165deg,rgba(40,96,255,.34),rgba(153,34,255,.16) 60%),var(--ng-glass)!important;
+  border:1px solid rgba(91,140,255,.8)!important;
+  border-bottom-width:1px!important;
+  border-radius:var(--ng-r-md)!important;
+  color:#fff!important;
+  box-shadow:var(--ng-glow-blue),inset 0 1px 0 rgba(255,255,255,.2)!important;
+}
+#ng#ng#ng .ability.cooling, #ng#ng#ng .ability:disabled, #ng#ng#ng .ability-btn[data-cooling="true"]{border-color:var(--ng-edge-soft)!important;box-shadow:none!important}
+#ng#ng#ng .worm-boost-button{background:linear-gradient(165deg,rgba(255,23,68,.36),rgba(153,34,255,.14) 60%),var(--ng-glass)!important;border-color:rgba(255,23,68,.8)!important;box-shadow:0 0 22px rgba(255,23,68,.38)!important}
+#ng#ng#ng .worm-boost-button:hover{border-color:var(--ng-red)!important}/* метка «Готово» у способностей */
+
+
+#ng#ng#ng .ability-cooldown-label{
+  background:var(--ng-blue-hi)!important;
+  border:0!important;
+  color:#04141f!important;
+  font-weight:800!important;
+  border-radius:var(--ng-r-pill)!important;
+}
+#ng#ng#ng .ability-btn[data-cooling="true"] .ability-cooldown-label{background:rgba(255,255,255,.16)!important;color:var(--ng-text)!important}/* ---------- Плитки быстрого меню: одно стекло, у каждой свой акцент ---------- */
+
+
+#ng#ng#ng .hub-story-shortcut{
+  --tile:var(--ng-violet);
+  background:linear-gradient(165deg,var(--ng-glass-hi),var(--ng-glass-soft) 55%),var(--ng-glass)!important;
+  border:1px solid color-mix(in srgb,var(--tile) 60%,transparent)!important;
+  border-bottom-width:1px!important;
+  border-radius:var(--ng-r-md)!important;
+  color:var(--ng-text)!important;
+  box-shadow:inset 0 -2px 0 var(--tile),0 6px 20px rgba(3,2,16,.5)!important;
+}
+#ng#ng#ng .hub-story-shortcut:hover{border-color:var(--tile)!important;box-shadow:inset 0 -2px 0 var(--tile),0 0 22px color-mix(in srgb,var(--tile) 55%,transparent)!important}
+#ng#ng#ng .hub-story-shortcut-icon{
+  background:color-mix(in srgb,var(--tile) 26%,transparent)!important;
+  border:1px solid color-mix(in srgb,var(--tile) 70%,transparent)!important;
+  border-radius:var(--ng-r-sm)!important;
+  color:color-mix(in srgb,var(--tile) 55%,#fff)!important;
+}
+#ng#ng#ng .hub-story-shortcut[data-shortcut="map"]{--tile:var(--ng-blue)}
+#ng#ng#ng .hub-story-shortcut[data-shortcut="evolution"]{--tile:var(--ng-violet)}
+#ng#ng#ng .hub-story-shortcut[data-shortcut="achievements"]{--tile:var(--ng-gold)}
+#ng#ng#ng .hub-story-shortcut[data-shortcut="music"]{--tile:var(--ng-violet)}
+#ng#ng#ng .hub-story-shortcut[data-shortcut="bestiary"]{--tile:var(--ng-red)}
+#ng#ng#ng .hub-story-shortcut[data-shortcut="statistics"]{--tile:var(--ng-green)}
+#ng#ng#ng .hub-story-shortcut[data-shortcut="settings"]{--tile:var(--ng-blue)}
+#ng#ng#ng .hub-story-shortcut[data-shortcut="new"]{--tile:var(--ng-red)}/* ---------- Строки настроек, поля, переключатели ---------- */
+
+
+#ng#ng#ng .settings-line, #ng#ng#ng .worm-setting-toggle, #ng#ng#ng .worm-setting-range{
+  background:var(--ng-glass-soft)!important;
+  border:1px solid var(--ng-edge-soft)!important;
+  border-radius:var(--ng-r-sm)!important;
+  color:var(--ng-text)!important;
+}
+#ng#ng#ng select, #ng#ng#ng input[type=number], #ng#ng#ng input[type=text]{
+  background:rgba(8,7,26,.85)!important;
+  border:1px solid var(--ng-edge)!important;
+  border-radius:var(--ng-r-sm)!important;
+  color:var(--ng-text)!important;
+}
+#ng#ng#ng input[type=range]{accent-color:var(--ng-blue-hi)}
+#ng#ng#ng input[type=checkbox]{accent-color:var(--ng-violet)}/* ---------- Заголовки окон ---------- */
+
+
+#ng#ng#ng .eyebrow, #ng#ng#ng .worm-eyebrow{color:var(--ng-blue-hi)!important}
+#ng#ng#ng .hero-title em, #ng#ng#ng .hero em{
+  background:var(--ng-grad-bar);
+  -webkit-background-clip:text;background-clip:text;
+  color:transparent!important;
+}/* значок масштаба камеры */
+
+
+
+#ng#ng#ng .zoom-glyph{
+  background:linear-gradient(145deg,rgba(153,34,255,.55),rgba(40,96,255,.35))!important;
+  border:1px solid var(--ng-edge)!important;
+  border-bottom-width:1px!important;
+  border-radius:7px!important;
+  box-shadow:inset 0 1px rgba(255,255,255,.3)!important;
+}
+#ng#ng#ng .zoom-glyph::before, #ng#ng#ng .zoom-glyph::after{background:#fff!important;box-shadow:0 0 8px rgba(91,140,255,.85)!important}
+
+#ng#ng#ng .brand b em, #ng#ng#ng .worm-brand em{color:var(--ng-gold)!important}/* наведение на главные кнопки: единый светлый ободок */
+
+
+#ng#ng#ng .primary:hover, #ng#ng#ng .big-play:hover, #ng#ng#ng .hub-continue:hover, #ng#ng#ng .hub-mode-story-play:hover, #ng#ng#ng .details-button:hover{border-color:var(--ng-blue-hi)!important}
+#ng#ng#ng .worm-primary:hover{border-color:var(--ng-blue)!important}
+#ng#ng#ng .worm-pause-button:hover{border-color:var(--ng-blue)!important}/* ==========================================================================
+   Внутренние экраны: эволюция, достижения, музыка, настройки, карта, бестиарий
+   Крупные блоки = стекло с рамкой. Строки и карточки внутри = лёгкое стекло без
+   перекраски рамки (у достижений цвет рамки означает редкость).
+   ========================================================================== *//* крупные блоки */
+
+
+
+
+#ng#ng#ng .evo-v2-current, #ng#ng#ng .evo-v2-goals, #ng#ng#ng .evo-v2-gallery, #ng#ng#ng .br-settings-main, #ng#ng#ng .br-settings-aside, #ng#ng#ng .br-ach-summary, #ng#ng#ng .music-player, #ng#ng#ng .music-wallet, #ng#ng#ng .br-best-details, #ng#ng#ng .map-corner, #ng#ng#ng .map-footer, #ng#ng#ng .hub-profile-chip, #ng#ng#ng .language-trigger, #ng#ng#ng .small-brand{
+  background:linear-gradient(165deg,var(--ng-glass-hi) 0%,var(--ng-glass-soft) 34%,transparent 62%),var(--ng-glass)!important;
+  border:1px solid var(--ng-edge)!important;
+  border-radius:var(--ng-r-md)!important;
+  box-shadow:0 10px 34px rgba(3,2,16,.5),inset 0 1px 0 rgba(255,255,255,.14)!important;
+  color:var(--ng-text)!important;
+}/* строки и карточки */
+
+#ng#ng#ng .evo-v2-form-card, #ng#ng#ng .evo-v2-goal, #ng#ng#ng .evo-v2-next, #ng#ng#ng .evo-v2-inspector, #ng#ng#ng .br-ach-row, #ng#ng#ng .music-track-card, #ng#ng#ng .br-best-row, #ng#ng#ng .br-option, #ng#ng#ng .br-readout-line, #ng#ng#ng .br-controls>*{
+  background:linear-gradient(165deg,rgba(255,255,255,.07),rgba(255,255,255,.02) 55%),rgba(17,14,42,.62)!important;
+  border-bottom-width:1px!important;
+  border-radius:var(--ng-r-sm)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.10)!important;
+}
+#ng#ng#ng .evo-v2-form-card:hover, #ng#ng#ng .music-track-card:hover, #ng#ng#ng .br-best-row:hover{box-shadow:inset 0 1px 0 rgba(255,255,255,.14),var(--ng-glow-violet)!important}
+#ng#ng#ng .evo-v2-form-card.current, #ng#ng#ng .br-best-row.selected, #ng#ng#ng .music-track-card.selected{
+  border-color:var(--ng-blue-hi)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.14),var(--ng-glow-blue)!important;
+}/* кнопки «Назад», фильтры, мелкие действия */
+
+#ng#ng#ng .back, #ng#ng#ng .br-head-back, #ng#ng#ng .mini-link, #ng#ng#ng .br-foot-secondary, #ng#ng#ng .br-small-action, #ng#ng#ng .atlas-control, #ng#ng#ng .br-filter, #ng#ng#ng .evo-v2-filters button, #ng#ng#ng .game-select-trigger, #ng#ng#ng .music-control, #ng#ng#ng .music-track-preview{
+  background:linear-gradient(165deg,var(--ng-glass-hi),var(--ng-glass-soft) 55%),var(--ng-glass)!important;
+  border:1px solid var(--ng-edge)!important;
+  border-bottom-width:1px!important;
+  border-radius:var(--ng-r-sm)!important;
+  color:var(--ng-text)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.14)!important;
+}
+#ng#ng#ng .back:hover, #ng#ng#ng .br-head-back:hover, #ng#ng#ng .mini-link:hover, #ng#ng#ng .br-foot-secondary:hover, #ng#ng#ng .br-small-action:hover, #ng#ng#ng .atlas-control:hover, #ng#ng#ng .br-filter:hover, #ng#ng#ng .evo-v2-filters button:hover, #ng#ng#ng .game-select-trigger:hover, #ng#ng#ng .music-control:hover, #ng#ng#ng .music-track-preview:hover{
+  border-color:var(--ng-blue-hi)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.18),var(--ng-glow-blue)!important;
+}/* выбранные вкладки и фильтры = тот же градиент, что у главной кнопки */
+
+#ng#ng#ng .br-tab.active, #ng#ng#ng .br-filter.active, #ng#ng#ng .evo-v2-filters button.active, #ng#ng#ng .evo-v2-filters button[aria-pressed="true"], #ng#ng#ng .br-switch.active{
+  background:var(--ng-grad)!important;
+  border-color:rgba(255,255,255,.34)!important;
+  color:#fff!important;
+  box-shadow:0 6px 22px rgba(40,96,255,.4),inset 0 1px 0 rgba(255,255,255,.35)!important;
+}
+#ng#ng#ng .br-tab{
+  background:linear-gradient(165deg,rgba(255,255,255,.07),rgba(255,255,255,.02) 55%),rgba(17,14,42,.62)!important;
+  border:1px solid var(--ng-edge-soft)!important;
+  border-bottom-width:1px!important;
+  border-radius:var(--ng-r-sm)!important;
+  color:var(--ng-text)!important;
+}
+#ng#ng#ng .br-tab.active{border-color:rgba(255,255,255,.34)!important}/* главные действия */
+
+#ng#ng#ng .br-foot-primary, #ng#ng#ng .br-inline-cta, #ng#ng#ng .map-accent-action, #ng#ng#ng .music-control-play, #ng#ng#ng .music-track-actions button:not(.music-track-preview):not(.chosen){
+  background:var(--ng-grad)!important;
+  border:1px solid rgba(255,255,255,.34)!important;
+  border-bottom-width:1px!important;
+  border-radius:var(--ng-r-md)!important;
+  color:#fff!important;
+  text-shadow:0 1px 2px rgba(20,0,60,.45);
+  box-shadow:0 6px 22px rgba(40,96,255,.4),inset 0 1px 0 rgba(255,255,255,.35)!important;
+}
+#ng#ng#ng .br-foot-primary:hover, #ng#ng#ng .br-inline-cta:hover, #ng#ng#ng .map-accent-action:hover, #ng#ng#ng .music-control-play:hover, #ng#ng#ng .music-track-actions button:not(.music-track-preview):not(.chosen):hover{filter:brightness(1.12);border-color:var(--ng-blue-hi)!important}/* «Выбрано» у трека */
+
+#ng#ng#ng .music-track-actions button.chosen{
+  background:rgba(39,255,64,.14)!important;
+  border:1px solid rgba(39,255,64,.7)!important;
+  border-bottom-width:1px!important;
+  color:#c9ffd1!important;
+  box-shadow:none!important;
+}/* опасное действие в настройках */
+
+#ng#ng#ng .br-small-action.warn{
+  background:linear-gradient(165deg,rgba(255,23,68,.30),rgba(255,23,68,.10)),var(--ng-glass)!important;
+  border-color:rgba(255,23,68,.7)!important;
+  color:#ffe3e8!important;
+}/* шкалы */
+
+#ng#ng#ng .evo-v2-meter{background:rgba(255,255,255,.10)!important;border-radius:var(--ng-r-pill)!important}
+#ng#ng#ng .evo-v2-meter i{background:var(--ng-grad-bar)!important;border-radius:var(--ng-r-pill)!important;box-shadow:0 0 12px rgba(91,140,255,.55)!important}/* ---------- Единый видимый фокус и уважение к reduced-motion ---------- */
+
+
+#ng#ng#ng :focus-visible{outline:2px solid #fff!important;outline-offset:3px!important}
+@media (prefers-reduced-motion:reduce){
+  #ng#ng#ng *, #ng#ng#ng *::before, #ng#ng#ng *::after{transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}
+}
