@@ -9,6 +9,7 @@ on:
       - 'cosmic-worms.js'
       - 'cosmic-worms.css'
       - 'ui-v15*.css'
+      - 'neon-glass.css'
       - 'ui-v15*.js'
       - 'ui-responsive-repair.css'
       - 'mobile-ui-polish.css'

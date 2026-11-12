@@ -88,8 +88,8 @@ const inspect=()=>{
      // A saturated button must never inherit a violet halo from another theme.
      // Verify real computed hover borders across every mode and semantic dock key.
      if(w===1920&&h===1080){
-      const hue=['rgb(40, 96, 255)','rgb(255, 23, 68)','rgb(153, 34, 255)',
-       'rgb(39, 255, 64)','rgb(255, 229, 0)','rgb(153, 34, 255)'][n];
+      // Neon Glass: every mode shares one primary button, so its hover rim is one colour.
+      const hue='rgb(91, 140, 255)';
       await page.locator('.hub-mode-story-play').hover();
       await page.waitForTimeout(210);
       const actual=await page.locator('.hub-mode-story-play').evaluate(el=>getComputedStyle(el).borderTopColor);

@@ -130,3 +130,14 @@ All game files are static. The included GitHub Actions workflow runs a syntax/sm
 
 ### 3.7 — Lens-only black hole
 Player black hole now bends the actual stars and galaxies behind it with a clipped, low-resolution 2D refraction pass. There is no painted gas cloud, accretion disk or bright ring. Natural black holes have restrained dark silhouettes. Saves and gameplay systems remain unchanged.
+
+
+## Дизайн-система «Неоновое стекло» (2026-11-12)
+
+Единый вид всех режимов (основная игра, Cosmic Arena, Cosmic Worms) задаёт один файл `neon-glass.css`. Он подключается последним и меняет только оформление: цвет, шрифт, рамки, свечение. Размеры и расположение не трогаются, поэтому геометрические тесты остаются валидными.
+
+- Палитра — пять цветов темы проекта (красный, зелёный, жёлтый, фиолетовый, синий) плюс светлый тон синего для свечения. Бирюза запрещена тестом `worms-browser-smoke`.
+- Шрифты: Exo 2 для заголовков, чисел и кнопок, Inter для текста. Оба уже подключены в `styles.css`.
+- Размытие фона (`backdrop-filter`) только у больших окон поверх замершей сцены, у HUD его нет, чтобы не снижать FPS.
+- Селекторы в `neon-glass.css` имеют приставку `#ng#ng#ng` (нужен `id="ng"` на `<html>`): пока в проекте лежат старые слои CSS с `!important`, иначе они перебивали бы новый стиль. Файл генерируется: правьте `tools/neon-glass/neon-glass.src.css` и запускайте `python3 tools/neon-glass/build.py`.
+- Когда старые слои (`ui-v15*.css`, `mobile-ui-polish.css`, `cosmic-spectrum.css` и др.) будут удалены, приставку и `!important` можно убрать.
